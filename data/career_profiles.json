@@ -1,0 +1,236 @@
+{
+  "software_engineer": {
+    "title": "Software Engineer",
+    "description": "Design, develop, and maintain software applications and systems",
+    "work_environment": "Office, Remote, Hybrid",
+    "work_life_balance": "Good",
+    "growth_outlook": "Excellent",
+    "salary_range": {
+      "min": 60000,
+      "max": 150000,
+      "median": 95000
+    },
+    "education_requirements": "Bachelor's degree in Computer Science or related field",
+    "required_skills": ["programming", "problem_solving", "software_development"],
+    "preferred_skills": ["algorithms", "data_structures", "version_control", "testing"],
+    "ideal_personality": {
+      "openness": 75,
+      "conscientiousness": 80,
+      "extraversion": 45,
+      "agreeableness": 60,
+      "neuroticism": 30
+    },
+    "entry_level_roles": ["Junior Developer", "Software Developer Intern", "Associate Developer"],
+    "mid_level_roles": ["Software Engineer", "Senior Developer", "Full Stack Developer"],
+    "senior_level_roles": ["Senior Software Engineer", "Lead Developer", "Technical Lead"],
+    "leadership_roles": ["Engineering Manager", "Principal Engineer", "CTO"],
+    "skill_progression": {
+      "beginner": ["Basic programming", "Version control", "Testing basics"],
+      "intermediate": ["System design", "Database management", "API development"],
+      "advanced": ["Architecture design", "Performance optimization", "Team leadership"],
+      "expert": ["Technical strategy", "Mentoring", "Innovation leadership"]
+    },
+    "typical_timeline": {
+      "entry_to_mid": "2-3 years",
+      "mid_to_senior": "3-5 years",
+      "senior_to_leadership": "5-8 years"
+    },
+    "recommended_certifications": ["AWS Certified Developer", "Google Cloud Professional", "Microsoft Azure"],
+    "networking_opportunities": ["Tech meetups", "Open source contributions", "Professional conferences"]
+  },
+  "data_scientist": {
+    "title": "Data Scientist",
+    "description": "Analyze complex data to help organizations make informed decisions",
+    "work_environment": "Office, Remote, Hybrid",
+    "work_life_balance": "Good",
+    "growth_outlook": "Excellent",
+    "salary_range": {
+      "min": 70000,
+      "max": 160000,
+      "median": 110000
+    },
+    "education_requirements": "Master's degree in Data Science, Statistics, or related field",
+    "required_skills": ["data_analysis", "statistics", "machine_learning", "programming"],
+    "preferred_skills": ["python", "sql", "visualization", "big_data"],
+    "ideal_personality": {
+      "openness": 85,
+      "conscientiousness": 75,
+      "extraversion": 40,
+      "agreeableness": 55,
+      "neuroticism": 35
+    },
+    "entry_level_roles": ["Data Analyst", "Junior Data Scientist", "Research Assistant"],
+    "mid_level_roles": ["Data Scientist", "Senior Data Analyst", "Machine Learning Engineer"],
+    "senior_level_roles": ["Senior Data Scientist", "Principal Data Scientist", "Data Science Manager"],
+    "leadership_roles": ["Head of Data Science", "Chief Data Officer", "VP of Analytics"],
+    "skill_progression": {
+      "beginner": ["Basic statistics", "Data visualization", "SQL basics"],
+      "intermediate": ["Machine learning", "Python/R programming", "Data engineering"],
+      "advanced": ["Deep learning", "Big data technologies", "Model deployment"],
+      "expert": ["AI strategy", "Research leadership", "Business intelligence"]
+    },
+    "typical_timeline": {
+      "entry_to_mid": "2-4 years",
+      "mid_to_senior": "3-5 years",
+      "senior_to_leadership": "5-7 years"
+    },
+    "recommended_certifications": ["AWS Machine Learning", "Google Data Analytics", "Microsoft Data Science"],
+    "networking_opportunities": ["Data science conferences", "Kaggle competitions", "Research publications"]
+  },
+  "product_manager": {
+    "title": "Product Manager",
+    "description": "Lead product development from conception to launch",
+    "work_environment": "Office, Remote, Hybrid",
+    "work_life_balance": "Moderate",
+    "growth_outlook": "Good",
+    "salary_range": {
+      "min": 80000,
+      "max": 180000,
+      "median": 125000
+    },
+    "education_requirements": "Bachelor's degree in Business, Engineering, or related field",
+    "required_skills": ["project_management", "communication", "business_analysis", "leadership"],
+    "preferred_skills": ["user_research", "data_analysis", "strategic_thinking", "stakeholder_management"],
+    "ideal_personality": {
+      "openness": 70,
+      "conscientiousness": 85,
+      "extraversion": 75,
+      "agreeableness": 70,
+      "neuroticism": 40
+    },
+    "entry_level_roles": ["Product Analyst", "Associate Product Manager", "Product Coordinator"],
+    "mid_level_roles": ["Product Manager", "Senior Product Manager", "Product Owner"],
+    "senior_level_roles": ["Principal Product Manager", "Director of Product", "VP of Product"],
+    "leadership_roles": ["Chief Product Officer", "Head of Product", "Product Strategy Director"],
+    "skill_progression": {
+      "beginner": ["Requirements gathering", "User research basics", "Project coordination"],
+      "intermediate": ["Product strategy", "Stakeholder management", "Data-driven decisions"],
+      "advanced": ["Product vision", "Team leadership", "Market analysis"],
+      "expert": ["Product portfolio", "Organizational strategy", "Innovation leadership"]
+    },
+    "typical_timeline": {
+      "entry_to_mid": "2-3 years",
+      "mid_to_senior": "3-4 years",
+      "senior_to_leadership": "4-6 years"
+    },
+    "recommended_certifications": ["Certified Scrum Product Owner", "Google Analytics", "PMP Certification"],
+    "networking_opportunities": ["Product management conferences", "Industry meetups", "Professional associations"]
+  },
+  "marketing_manager": {
+    "title": "Marketing Manager",
+    "description": "Develop and execute marketing strategies to promote products and services",
+    "work_environment": "Office, Remote, Hybrid",
+    "work_life_balance": "Moderate",
+    "growth_outlook": "Good",
+    "salary_range": {
+      "min": 55000,
+      "max": 120000,
+      "median": 80000
+    },
+    "education_requirements": "Bachelor's degree in Marketing, Business, or related field",
+    "required_skills": ["marketing", "communication", "analytics", "project_management"],
+    "preferred_skills": ["digital_marketing", "content_creation", "brand_management", "social_media"],
+    "ideal_personality": {
+      "openness": 70,
+      "conscientiousness": 75,
+      "extraversion": 80,
+      "agreeableness": 75,
+      "neuroticism": 45
+    },
+    "entry_level_roles": ["Marketing Coordinator", "Marketing Assistant", "Digital Marketing Specialist"],
+    "mid_level_roles": ["Marketing Manager", "Brand Manager", "Content Manager"],
+    "senior_level_roles": ["Senior Marketing Manager", "Marketing Director", "Brand Director"],
+    "leadership_roles": ["VP of Marketing", "Chief Marketing Officer", "Head of Marketing"],
+    "skill_progression": {
+      "beginner": ["Content creation", "Social media management", "Basic analytics"],
+      "intermediate": ["Campaign management", "Brand strategy", "Market research"],
+      "advanced": ["Marketing strategy", "Team leadership", "Budget management"],
+      "expert": ["Marketing vision", "Organizational leadership", "Innovation strategy"]
+    },
+    "typical_timeline": {
+      "entry_to_mid": "2-3 years",
+      "mid_to_senior": "3-4 years",
+      "senior_to_leadership": "4-6 years"
+    },
+    "recommended_certifications": ["Google Analytics", "HubSpot Marketing", "Facebook Blueprint"],
+    "networking_opportunities": ["Marketing conferences", "Industry events", "Professional associations"]
+  },
+  "financial_analyst": {
+    "title": "Financial Analyst",
+    "description": "Analyze financial data to help organizations make investment and business decisions",
+    "work_environment": "Office, Remote, Hybrid",
+    "work_life_balance": "Moderate",
+    "growth_outlook": "Good",
+    "salary_range": {
+      "min": 50000,
+      "max": 100000,
+      "median": 70000
+    },
+    "education_requirements": "Bachelor's degree in Finance, Economics, or related field",
+    "required_skills": ["financial_analysis", "data_analysis", "excel", "financial_modeling"],
+    "preferred_skills": ["sql", "python", "risk_management", "investment_analysis"],
+    "ideal_personality": {
+      "openness": 60,
+      "conscientiousness": 90,
+      "extraversion": 50,
+      "agreeableness": 60,
+      "neuroticism": 35
+    },
+    "entry_level_roles": ["Junior Financial Analyst", "Investment Analyst", "Credit Analyst"],
+    "mid_level_roles": ["Financial Analyst", "Senior Financial Analyst", "Portfolio Analyst"],
+    "senior_level_roles": ["Senior Financial Analyst", "Finance Manager", "Investment Manager"],
+    "leadership_roles": ["Director of Finance", "CFO", "Head of Investment"],
+    "skill_progression": {
+      "beginner": ["Financial modeling", "Excel proficiency", "Basic accounting"],
+      "intermediate": ["Advanced analytics", "Risk assessment", "Investment research"],
+      "advanced": ["Portfolio management", "Strategic planning", "Team leadership"],
+      "expert": ["Financial strategy", "Organizational leadership", "Market expertise"]
+    },
+    "typical_timeline": {
+      "entry_to_mid": "2-3 years",
+      "mid_to_senior": "3-5 years",
+      "senior_to_leadership": "5-8 years"
+    },
+    "recommended_certifications": ["CFA", "CPA", "FRM", "CFP"],
+    "networking_opportunities": ["Financial conferences", "Professional associations", "Industry events"]
+  },
+  "ux_designer": {
+    "title": "UX Designer",
+    "description": "Design user experiences for digital products and services",
+    "work_environment": "Office, Remote, Hybrid",
+    "work_life_balance": "Good",
+    "growth_outlook": "Excellent",
+    "salary_range": {
+      "min": 60000,
+      "max": 130000,
+      "median": 90000
+    },
+    "education_requirements": "Bachelor's degree in Design, HCI, or related field",
+    "required_skills": ["user_research", "design_thinking", "prototyping", "usability_testing"],
+    "preferred_skills": ["figma", "sketch", "adobe_creative_suite", "frontend_development"],
+    "ideal_personality": {
+      "openness": 85,
+      "conscientiousness": 70,
+      "extraversion": 60,
+      "agreeableness": 75,
+      "neuroticism": 40
+    },
+    "entry_level_roles": ["UX Designer", "UI Designer", "UX Researcher"],
+    "mid_level_roles": ["Senior UX Designer", "UX Lead", "Product Designer"],
+    "senior_level_roles": ["Principal UX Designer", "UX Manager", "Design Director"],
+    "leadership_roles": ["Head of Design", "Chief Design Officer", "VP of Design"],
+    "skill_progression": {
+      "beginner": ["Design fundamentals", "User research basics", "Prototyping tools"],
+      "intermediate": ["Advanced research", "Design systems", "Collaboration skills"],
+      "advanced": ["Design strategy", "Team leadership", "Cross-functional work"],
+      "expert": ["Design vision", "Organizational impact", "Innovation leadership"]
+    },
+    "typical_timeline": {
+      "entry_to_mid": "2-3 years",
+      "mid_to_senior": "3-4 years",
+      "senior_to_leadership": "4-6 years"
+    },
+    "recommended_certifications": ["Google UX Design", "Adobe Certified Expert", "Nielsen Norman Group"],
+    "networking_opportunities": ["Design conferences", "UX meetups", "Design communities"]
+  }
+}

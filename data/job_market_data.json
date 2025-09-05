@@ -1,0 +1,220 @@
+{
+  "last_updated": "2024-01-15T10:00:00Z",
+  "market_trends": {
+    "remote_work_percentage": 35.2,
+    "average_salary_growth": 4.5,
+    "job_growth_rate": 3.2,
+    "skill_demand_trends": {
+      "python": "high",
+      "data_analysis": "high",
+      "cloud_computing": "high",
+      "machine_learning": "high",
+      "cybersecurity": "high",
+      "project_management": "medium",
+      "communication": "high",
+      "leadership": "medium"
+    }
+  },
+  "industry_analysis": {
+    "technology": {
+      "growth_rate": 5.8,
+      "average_salary": 95000,
+      "job_openings": 125000,
+      "top_skills": ["programming", "cloud_computing", "data_analysis", "cybersecurity"],
+      "remote_friendly": true
+    },
+    "finance": {
+      "growth_rate": 2.1,
+      "average_salary": 78000,
+      "job_openings": 45000,
+      "top_skills": ["financial_analysis", "risk_management", "data_analysis", "compliance"],
+      "remote_friendly": false
+    },
+    "healthcare": {
+      "growth_rate": 4.2,
+      "average_salary": 72000,
+      "job_openings": 89000,
+      "top_skills": ["patient_care", "medical_technology", "data_analysis", "communication"],
+      "remote_friendly": false
+    },
+    "marketing": {
+      "growth_rate": 3.5,
+      "average_salary": 65000,
+      "job_openings": 67000,
+      "top_skills": ["digital_marketing", "data_analysis", "content_creation", "social_media"],
+      "remote_friendly": true
+    },
+    "education": {
+      "growth_rate": 1.8,
+      "average_salary": 55000,
+      "job_openings": 34000,
+      "top_skills": ["teaching", "curriculum_development", "technology_integration", "communication"],
+      "remote_friendly": true
+    }
+  },
+  "geographic_analysis": {
+    "high_demand_regions": [
+      {
+        "region": "San Francisco Bay Area",
+        "average_salary": 120000,
+        "job_growth": 6.2,
+        "top_industries": ["technology", "finance", "healthcare"]
+      },
+      {
+        "region": "New York City",
+        "average_salary": 95000,
+        "job_growth": 4.1,
+        "top_industries": ["finance", "technology", "marketing"]
+      },
+      {
+        "region": "Seattle",
+        "average_salary": 105000,
+        "job_growth": 5.5,
+        "top_industries": ["technology", "healthcare", "education"]
+      },
+      {
+        "region": "Austin",
+        "average_salary": 85000,
+        "job_growth": 4.8,
+        "top_industries": ["technology", "marketing", "finance"]
+      }
+    ],
+    "emerging_markets": [
+      {
+        "region": "Denver",
+        "average_salary": 75000,
+        "job_growth": 3.9,
+        "top_industries": ["technology", "healthcare", "finance"]
+      },
+      {
+        "region": "Nashville",
+        "average_salary": 65000,
+        "job_growth": 3.2,
+        "top_industries": ["healthcare", "education", "technology"]
+      }
+    ]
+  },
+  "skill_demand_analysis": {
+    "high_demand_skills": [
+      {
+        "skill": "python",
+        "demand_score": 95,
+        "salary_premium": 15,
+        "growth_rate": 8.2
+      },
+      {
+        "skill": "data_analysis",
+        "demand_score": 92,
+        "salary_premium": 12,
+        "growth_rate": 7.5
+      },
+      {
+        "skill": "cloud_computing",
+        "demand_score": 88,
+        "salary_premium": 18,
+        "growth_rate": 9.1
+      },
+      {
+        "skill": "machine_learning",
+        "demand_score": 85,
+        "salary_premium": 20,
+        "growth_rate": 10.3
+      },
+      {
+        "skill": "cybersecurity",
+        "demand_score": 82,
+        "salary_premium": 16,
+        "growth_rate": 8.7
+      }
+    ],
+    "emerging_skills": [
+      {
+        "skill": "artificial_intelligence",
+        "demand_score": 75,
+        "salary_premium": 25,
+        "growth_rate": 12.5
+      },
+      {
+        "skill": "blockchain",
+        "demand_score": 68,
+        "salary_premium": 22,
+        "growth_rate": 11.2
+      },
+      {
+        "skill": "quantum_computing",
+        "demand_score": 45,
+        "salary_premium": 30,
+        "growth_rate": 15.8
+      }
+    ]
+  },
+  "salary_benchmarks": {
+    "entry_level": {
+      "software_engineer": 65000,
+      "data_scientist": 70000,
+      "product_manager": 75000,
+      "marketing_manager": 55000,
+      "financial_analyst": 50000,
+      "ux_designer": 60000
+    },
+    "mid_level": {
+      "software_engineer": 95000,
+      "data_scientist": 110000,
+      "product_manager": 125000,
+      "marketing_manager": 80000,
+      "financial_analyst": 70000,
+      "ux_designer": 90000
+    },
+    "senior_level": {
+      "software_engineer": 130000,
+      "data_scientist": 140000,
+      "product_manager": 160000,
+      "marketing_manager": 110000,
+      "financial_analyst": 95000,
+      "ux_designer": 120000
+    }
+  },
+  "remote_work_analysis": {
+    "fully_remote_percentage": 25.3,
+    "hybrid_percentage": 42.1,
+    "office_only_percentage": 32.6,
+    "remote_friendly_industries": [
+      "technology",
+      "marketing",
+      "education",
+      "consulting",
+      "finance"
+    ],
+    "remote_salary_impact": {
+      "positive": 8.5,
+      "negative": -3.2,
+      "neutral": 0.0
+    }
+  },
+  "job_market_forecast": {
+    "next_6_months": {
+      "overall_growth": 3.8,
+      "technology_growth": 6.2,
+      "finance_growth": 2.1,
+      "healthcare_growth": 4.5,
+      "marketing_growth": 3.2
+    },
+    "next_12_months": {
+      "overall_growth": 4.2,
+      "technology_growth": 7.1,
+      "finance_growth": 2.8,
+      "healthcare_growth": 5.1,
+      "marketing_growth": 3.8
+    },
+    "trending_roles": [
+      "AI/ML Engineer",
+      "Data Engineer",
+      "DevOps Engineer",
+      "Product Manager",
+      "UX Designer",
+      "Cybersecurity Analyst",
+      "Cloud Architect",
+      "Digital Marketing Specialist"
+    ]
+  }
+}
