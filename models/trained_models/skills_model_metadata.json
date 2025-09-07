@@ -1,0 +1,90 @@
+{
+  "model_type": "skills_recommendation",
+  "hamming_loss": 0.01984126984126984,
+  "avg_accuracy": 0.9801587301587302,
+  "features": [
+    "career_path",
+    "experience_years",
+    "education_level",
+    "industry_type",
+    "current_role",
+    "location_tier"
+  ],
+  "skills": [
+    "AWS",
+    "Accounting",
+    "Adobe Creative Suite",
+    "Agile",
+    "Analytics",
+    "CI/CD",
+    "CRM",
+    "Communication",
+    "Content Creation",
+    "Design Thinking",
+    "Digital Marketing",
+    "Docker",
+    "Documentation",
+    "Employee Relations",
+    "Excel",
+    "Figma",
+    "Financial Modeling",
+    "Git",
+    "HR Analytics",
+    "Industry Knowledge",
+    "Java",
+    "JavaScript",
+    "Kubernetes",
+    "Leadership",
+    "Linux",
+    "Machine Learning",
+    "Market Research",
+    "Mentoring",
+    "Monitoring",
+    "Negotiation",
+    "Presentation",
+    "Problem Solving",
+    "Process Improvement",
+    "Product Strategy",
+    "Project Management",
+    "Prototyping",
+    "Python",
+    "R",
+    "Recruitment",
+    "SEO",
+    "SQL",
+    "Social Media",
+    "Statistics",
+    "Strategic Planning",
+    "Tableau",
+    "Team Management",
+    "Training",
+    "User Research"
+  ],
+  "num_skills": 48,
+  "feature_importance": [
+    {
+      "feature": "current_role",
+      "importance": 0.3965237233773505
+    },
+    {
+      "feature": "career_path",
+      "importance": 0.39571542584631053
+    },
+    {
+      "feature": "experience_years",
+      "importance": 0.14388138514921592
+    },
+    {
+      "feature": "industry_type",
+      "importance": 0.02705215911862437
+    },
+    {
+      "feature": "location_tier",
+      "importance": 0.01879630782058169
+    },
+    {
+      "feature": "education_level",
+      "importance": 0.01803099868791694
+    }
+  ]
+}
