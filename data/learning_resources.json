@@ -1,0 +1,331 @@
+{
+  "online_platforms": {
+    "coursera": {
+      "name": "Coursera",
+      "type": "University partnerships",
+      "pricing": "Freemium",
+      "strengths": ["Academic rigor", "Certificates", "Financial aid"],
+      "popular_courses": [
+        {
+          "name": "Machine Learning by Andrew Ng",
+          "duration": "11 weeks",
+          "rating": 4.9,
+          "enrolled": "4M+",
+          "skills": ["Machine Learning", "Python", "Neural Networks"]
+        },
+        {
+          "name": "Google Data Analytics Certificate",
+          "duration": "6 months",
+          "rating": 4.6,
+          "job_placement": "87%",
+          "skills": ["Data Analysis", "SQL", "Tableau", "R"]
+        }
+      ]
+    },
+    "udemy": {
+      "name": "Udemy",
+      "type": "Marketplace",
+      "pricing": "One-time purchase",
+      "strengths": ["Practical focus", "Lifetime access", "Variety"],
+      "popular_courses": [
+        {
+          "name": "Complete Python Developer Bootcamp",
+          "duration": "40 hours",
+          "rating": 4.5,
+          "students": "500K+",
+          "skills": ["Python", "Web Development", "Data Science"]
+        }
+      ]
+    },
+    "edx": {
+      "name": "edX",
+      "type": "University consortium",
+      "pricing": "Free + paid certificates",
+      "strengths": ["University quality", "MicroMasters", "Professional ed"],
+      "popular_courses": [
+        {
+          "name": "MIT Introduction to Computer Science",
+          "duration": "9 weeks",
+          "rating": 4.8,
+          "skills": ["Programming", "Algorithms", "Problem Solving"]
+        }
+      ]
+    }
+  },
+  "indian_platforms": {
+    "byju": {
+      "name": "BYJU'S",
+      "focus": "Comprehensive learning",
+      "target": ["K-12", "Competitive exams"],
+      "strengths": ["Indian curriculum", "Personalized learning"]
+    },
+    "unacademy": {
+      "name": "Unacademy", 
+      "focus": "Competitive exam prep",
+      "target": ["UPSC", "JEE", "NEET", "Banking"],
+      "strengths": ["Live classes", "Indian educators"]
+    },
+    "upgrad": {
+      "name": "upGrad",
+      "focus": "Professional upskilling",
+      "target": ["Working professionals", "Career transition"],
+      "popular_programs": [
+        {
+          "name": "Data Science Program",
+          "duration": "18 months",
+          "placement_rate": "85%",
+          "avg_salary_hike": "40%"
+        }
+      ]
+    }
+  },
+  "skill_specific_resources": {
+    "programming": {
+      "beginner": [
+        {
+          "name": "Codecademy",
+          "type": "Interactive",
+          "languages": ["Python", "JavaScript", "Java", "C++"],
+          "pricing": "Freemium",
+          "time_to_complete": "3-6 months"
+        },
+        {
+          "name": "freeCodeCamp",
+          "type": "Project-based",
+          "focus": "Web development",
+          "pricing": "Free",
+          "certification": "Yes"
+        }
+      ],
+      "intermediate": [
+        {
+          "name": "LeetCode",
+          "type": "Problem solving",
+          "focus": "Interview prep",
+          "pricing": "Freemium",
+          "companies": "FAANG preparation"
+        },
+        {
+          "name": "HackerRank",
+          "type": "Coding challenges",
+          "focus": "Skills assessment",
+          "pricing": "Freemium",
+          "employer_recognition": "High"
+        }
+      ],
+      "advanced": [
+        {
+          "name": "System Design Interview",
+          "type": "Book + courses",
+          "focus": "Architecture design",
+          "target": "Senior roles"
+        }
+      ]
+    },
+    "data_science": {
+      "beginner": [
+        {
+          "name": "Kaggle Learn",
+          "type": "Micro-courses",
+          "topics": ["Python", "Pandas", "Machine Learning"],
+          "pricing": "Free",
+          "hands_on": "Yes"
+        }
+      ],
+      "intermediate": [
+        {
+          "name": "DataCamp",
+          "type": "Interactive learning",
+          "languages": ["Python", "R", "SQL"],
+          "pricing": "Subscription",
+          "career_tracks": "Yes"
+        }
+      ],
+      "advanced": [
+        {
+          "name": "Fast.ai",
+          "type": "Deep learning focused",
+          "approach": "Top-down learning",
+          "pricing": "Free",
+          "community": "Strong"
+        }
+      ]
+    },
+    "digital_marketing": {
+      "certifications": [
+        {
+          "name": "Google Ads Certification",
+          "provider": "Google",
+          "validity": "1 year",
+          "cost": "Free",
+          "recognition": "Industry standard"
+        },
+        {
+          "name": "Facebook Blueprint",
+          "provider": "Meta",
+          "focus": "Facebook/Instagram ads",
+          "cost": "Free",
+          "levels": ["Associate", "Professional"]
+        },
+        {
+          "name": "HubSpot Content Marketing",
+          "provider": "HubSpot",
+          "focus": "Inbound marketing",
+          "cost": "Free",
+          "duration": "4 hours"
+        }
+      ]
+    },
+    "finance": {
+      "professional_certifications": [
+        {
+          "name": "CFA",
+          "full_name": "Chartered Financial Analyst",
+          "levels": 3,
+          "duration": "2-4 years",
+          "cost": "High",
+          "recognition": "Global gold standard"
+        },
+        {
+          "name": "FRM",
+          "full_name": "Financial Risk Manager",
+          "levels": 2,
+          "duration": "1-2 years",
+          "focus": "Risk management",
+          "recognition": "High in banking"
+        }
+      ]
+    }
+  },
+  "books_by_field": {
+    "programming": [
+      {
+        "title": "Clean Code",
+        "author": "Robert Martin",
+        "level": "Intermediate",
+        "focus": "Code quality",
+        "rating": 4.7
+      },
+      {
+        "title": "Cracking the Coding Interview",
+        "author": "Gayle McDowell",
+        "level": "Interview prep",
+        "focus": "Technical interviews",
+        "rating": 4.6
+      }
+    ],
+    "data_science": [
+      {
+        "title": "Python for Data Analysis",
+        "author": "Wes McKinney",
+        "level": "Beginner-Intermediate",
+        "focus": "Pandas, NumPy",
+        "rating": 4.5
+      },
+      {
+        "title": "Hands-On Machine Learning",
+        "author": "Aurélien Géron",
+        "level": "Intermediate",
+        "focus": "Practical ML",
+        "rating": 4.8
+      }
+    ],
+    "business": [
+      {
+        "title": "Good to Great",
+        "author": "Jim Collins",
+        "level": "Management",
+        "focus": "Business strategy",
+        "rating": 4.6
+      }
+    ]
+  },
+  "bootcamps_india": {
+    "coding": [
+      {
+        "name": "Masai School",
+        "duration": "30 weeks",
+        "model": "Income share agreement",
+        "placement_rate": "80%",
+        "focus": ["Full stack", "Data structures"]
+      },
+      {
+        "name": "Coding Ninjas",
+        "duration": "6-8 months",
+        "model": "Fee-based",
+        "focus": ["Competitive programming", "Development"],
+        "recognition": "Good"
+      }
+    ],
+    "data_science": [
+      {
+        "name": "Praxis Business School",
+        "duration": "11 months",
+        "model": "Traditional fee",
+        "placement_rate": "90%",
+        "avg_salary": "800000"
+      }
+    ]
+  },
+  "government_programs": {
+    "skill_india": {
+      "name": "Skill India Initiative",
+      "focus": "Vocational training",
+      "sectors": ["IT", "Healthcare", "Tourism", "Banking"],
+      "certification": "Government recognized",
+      "cost": "Subsidized/Free"
+    },
+    "pmkvy": {
+      "name": "Pradhan Mantri Kaushal Vikas Yojana",
+      "focus": "Skill development",
+      "target": "Youth employment",
+      "financial_support": "Yes"
+    }
+  },
+  "learning_pathways": {
+    "software_engineer": {
+      "beginner": [
+        "Programming fundamentals",
+        "Data structures and algorithms", 
+        "Web development basics",
+        "Version control (Git)",
+        "Basic database concepts"
+      ],
+      "intermediate": [
+        "System design",
+        "Advanced algorithms",
+        "Framework specialization",
+        "Testing and debugging",
+        "Cloud platforms"
+      ],
+      "advanced": [
+        "Architecture design",
+        "Performance optimization",
+        "Team leadership",
+        "Technology strategy"
+      ]
+    },
+    "data_scientist": {
+      "beginner": [
+        "Statistics and probability",
+        "Python/R programming",
+        "Data manipulation (Pandas)",
+        "Data visualization",
+        "Basic machine learning"
+      ],
+      "intermediate": [
+        "Advanced ML algorithms",
+        "Deep learning",
+        "Big data tools",
+        "Model deployment",
+        "A/B testing"
+      ],
+      "advanced": [
+        "MLOps",
+        "Research methodologies",
+        "Business strategy",
+        "Team leadership"
+      ]
+    }
+  }
+}

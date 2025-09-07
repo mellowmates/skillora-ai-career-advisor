@@ -1,0 +1,442 @@
+{
+  "intents": {
+    "greeting": {
+      "patterns": [
+        "hello",
+        "hi",
+        "hey",
+        "good morning",
+        "good afternoon",
+        "good evening",
+        "namaste"
+      ],
+      "responses": [
+        "Hello! I'm here to help guide your career journey. What would you like to explore today?",
+        "Hi there! Welcome to Skillora. How can I assist you with your career planning?",
+        "Namaste! I'm your AI career advisor. What career questions do you have?",
+        "Greetings! Ready to discover your perfect career path?"
+      ],
+      "context_set": "greeting_complete"
+    },
+    "career_options": {
+      "patterns": [
+        "career options",
+        "job suggestions",
+        "what career",
+        "career paths",
+        "profession recommendations",
+        "suitable careers"
+      ],
+      "responses": [
+        "I'd love to help you explore career options! Could you tell me about your educational background and interests?",
+        "Great question! What field excites you most - technology, business, healthcare, or something else?",
+        "To suggest the best careers for you, what are your strongest skills and preferred work environment?",
+        "Career exploration is exciting! What subjects or activities do you enjoy most?"
+      ],
+      "follow_up_questions": [
+        "What's your educational background?",
+        "What are your strongest skills?",
+        "Do you prefer working with people, data, or creative projects?",
+        "Are you interested in technical or non-technical roles?"
+      ],
+      "context_set": "career_inquiry"
+    },
+    "skills_development": {
+      "patterns": [
+        "skills to learn",
+        "skill development",
+        "what skills",
+        "improve skills",
+        "skill gap",
+        "technical skills",
+        "soft skills"
+      ],
+      "responses": [
+        "Skill development is crucial! What career field are you targeting?",
+        "Excellent focus on skills! Are you looking at technical skills, soft skills, or both?",
+        "Which area interests you - programming, data analysis, marketing, or finance?",
+        "Smart thinking! What's your current experience level?"
+      ],
+      "popular_skills": [
+        "Python Programming - High demand in tech and data science",
+        "Data Analysis - Critical for decision making across industries",
+        "Digital Marketing - Essential for business growth in digital age",
+        "Communication - Valuable across all careers and roles",
+        "Machine Learning - Future-focused skill with high growth potential",
+        "Cloud Computing - Infrastructure skill in high demand",
+        "Project Management - Leadership skill for career advancement"
+      ],
+      "context_set": "skills_inquiry"
+    },
+    "salary_information": {
+      "patterns": [
+        "salary",
+        "pay",
+        "compensation",
+        "earnings",
+        "how much earn",
+        "salary range",
+        "income expectations"
+      ],
+      "responses": [
+        "Salary varies by role, experience, and location. Which position interests you?",
+        "I can provide salary insights! What's your experience level and target role?",
+        "Compensation depends on several factors. Are you looking at entry-level or experienced positions?",
+        "Let me help with salary expectations! Which city and field are you considering?"
+      ],
+      "salary_factors": [
+        "Experience level (0-2, 3-5, 6-10, 10+ years)",
+        "Location (Bangalore, Mumbai, Delhi pay differently)",
+        "Company type (Startup, MNC, Product company)",
+        "Education background (Engineering, MBA, Professional courses)",
+        "Skill specialization (AI/ML, Cloud, etc. have premiums)"
+      ],
+      "context_set": "salary_inquiry"
+    },
+    "education_guidance": {
+      "patterns": [
+        "what to study",
+        "education path",
+        "degree recommendations",
+        "course suggestions",
+        "college advice",
+        "further studies"
+      ],
+      "responses": [
+        "Education planning is important! What's your current level and career interests?",
+        "Great question about education! Are you looking at degree programs or skill-specific courses?",
+        "Let me help with educational guidance! What field excites you most?",
+        "Educational choices shape your career! What's your learning style and timeline?"
+      ],
+      "education_types": [
+        "Engineering (B.Tech/B.E.) - For technical careers",
+        "Management (MBA) - For leadership and business roles",
+        "Professional courses (CA/CS) - For specialized expertise",
+        "Computer Applications (BCA/MCA) - For IT careers",
+        "Online certifications - For skill-specific learning",
+        "Bootcamps - For quick career transitions"
+      ],
+      "context_set": "education_inquiry"
+    },
+    "market_trends": {
+      "patterns": [
+        "job market",
+        "industry trends",
+        "demand",
+        "growth sectors",
+        "emerging careers",
+        "future jobs",
+        "market analysis"
+      ],
+      "responses": [
+        "The job market is evolving rapidly! Which sector interests you most?",
+        "Current trends show high growth in tech, healthcare, and finance. What would you like to explore?",
+        "Market intelligence is valuable! Are you interested in emerging roles or established fields?",
+        "Great interest in trends! Which skills or industries are you curious about?"
+      ],
+      "trending_sectors": [
+        "Technology - AI/ML, Cloud Computing, Cybersecurity",
+        "Healthcare - Telemedicine, Health Tech, Biotech",
+        "Finance - Fintech, Digital Banking, Risk Management",
+        "E-commerce - Digital Marketing, Data Analytics, Supply Chain",
+        "Education - Edtech, Online Learning, Skill Development",
+        "Sustainability - Green Tech, Renewable Energy, ESG"
+      ],
+      "hot_skills_2025": [
+        "Artificial Intelligence and Machine Learning",
+        "Cloud Computing and DevOps",
+        "Data Science and Analytics",
+        "Cybersecurity",
+        "Digital Marketing and Growth Hacking",
+        "Product Management",
+        "UI/UX Design"
+      ],
+      "context_set": "market_trends"
+    },
+    "interview_preparation": {
+      "patterns": [
+        "interview prep",
+        "interview tips",
+        "how to prepare",
+        "interview questions",
+        "job interview"
+      ],
+      "responses": [
+        "Interview preparation is crucial! What type of role are you preparing for?",
+        "Great focus on interview skills! Are you looking for technical or behavioral guidance?",
+        "I can help with interview prep! What's your biggest concern about interviews?",
+        "Interview success comes with preparation! Which aspect would you like help with?"
+      ],
+      "interview_types": {
+        "technical": [
+          "Coding challenges",
+          "System design",
+          "Technical concepts",
+          "Problem solving"
+        ],
+        "behavioral": [
+          "STAR method",
+          "Leadership examples",
+          "Team collaboration",
+          "Conflict resolution"
+        ],
+        "case_study": [
+          "Business problems",
+          "Analytical thinking",
+          "Structured approach",
+          "Communication"
+        ],
+        "domain_specific": [
+          "Industry knowledge",
+          "Role-specific skills",
+          "Market understanding"
+        ]
+      },
+      "preparation_tips": [
+        "Research the company and role thoroughly",
+        "Practice common questions for your field",
+        "Prepare specific examples using STAR method",
+        "Review your technical skills and concepts",
+        "Prepare thoughtful questions to ask interviewer",
+        "Practice mock interviews with peers"
+      ],
+      "context_set": "interview_prep"
+    },
+    "career_change": {
+      "patterns": [
+        "career change",
+        "switch careers",
+        "career transition",
+        "change field",
+        "pivot career"
+      ],
+      "responses": [
+        "Career transitions can be rewarding! What's motivating your desire to change?",
+        "Many successful professionals switch careers. What new field interests you?",
+        "Career pivots require planning! What skills do you want to leverage or develop?",
+        "Exciting to explore new paths! What's your current background and target field?"
+      ],
+      "transition_strategies": [
+        "Identify transferable skills from current role",
+        "Bridge skill gaps through targeted learning",
+        "Network in your target industry",
+        "Consider gradual transition through projects",
+        "Build portfolio showcasing relevant work",
+        "Find mentors in your target field"
+      ],
+      "common_transitions": [
+        "Engineering → Product Management",
+        "Any field → Data Science (with upskilling)",
+        "Traditional roles → Digital Marketing",
+        "Technical → Consulting",
+        "Corporate → Entrepreneurship"
+      ],
+      "context_set": "career_transition"
+    },
+    "work_life_balance": {
+      "patterns": [
+        "work life balance",
+        "job satisfaction",
+        "company culture",
+        "work environment",
+        "remote work"
+      ],
+      "responses": [
+        "Work-life balance is important for career satisfaction! What matters most to you?",
+        "Great question about work environment! Are you looking for remote, hybrid, or office work?",
+        "Company culture varies significantly! What type of environment do you thrive in?",
+        "Work satisfaction depends on many factors! What are your priorities?"
+      ],
+      "balance_factors": [
+        "Flexible working hours",
+        "Remote/hybrid work options",
+        "Company culture and values alignment",
+        "Growth and learning opportunities",
+        "Compensation and benefits",
+        "Team dynamics and management style"
+      ],
+      "company_types": {
+        "startups": [
+          "Fast-paced",
+          "High growth",
+          "Equity potential",
+          "Varied responsibilities"
+        ],
+        "mncs": [
+          "Structured processes",
+          "Global exposure",
+          "Good benefits",
+          "Career stability"
+        ],
+        "mid_size": [
+          "Balance of structure and flexibility",
+          "Growth opportunities",
+          "Personal impact"
+        ],
+        "government": [
+          "Job security",
+          "Work-life balance",
+          "Social impact",
+          "Structured career"
+        ]
+      }
+    },
+    "entrepreneurship": {
+      "patterns": [
+        "start business",
+        "entrepreneurship",
+        "startup",
+        "own company",
+        "be boss"
+      ],
+      "responses": [
+        "Entrepreneurship is exciting! What business idea or problem interests you?",
+        "Starting a business requires planning! What's your background and passion area?",
+        "Great entrepreneurial spirit! Do you have a specific industry or solution in mind?",
+        "Building a startup is challenging but rewarding! What stage are you at in your thinking?"
+      ],
+      "startup_considerations": [
+        "Market research and validation",
+        "Business model development",
+        "Funding and financial planning",
+        "Team building and partnerships",
+        "Legal structure and compliance",
+        "Marketing and customer acquisition"
+      ],
+      "indian_startup_ecosystem": [
+        "Bangalore - Tech and innovation hub",
+        "Mumbai - Fintech and media startups",
+        "Delhi NCR - B2B and government solutions",
+        "Pune - Enterprise and automotive tech",
+        "Hyderabad - Healthcare and biotech"
+      ]
+    },
+    "thanks": {
+      "patterns": [
+        "thank you",
+        "thanks",
+        "appreciate",
+        "helpful",
+        "great advice"
+      ],
+      "responses": [
+        "You're very welcome! Feel free to ask more questions anytime.",
+        "Happy to help! Is there anything else about your career journey you'd like to explore?",
+        "Glad I could assist! Do you have any other career-related questions?",
+        "You're welcome! I'm here whenever you need career guidance."
+      ],
+      "context_set": "thanks_given"
+    },
+    "goodbye": {
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you",
+        "that's all",
+        "no more questions",
+        "exit"
+      ],
+      "responses": [
+        "Goodbye! Best of luck with your career journey. Come back anytime for more guidance!",
+        "Take care! Remember, I'm here whenever you need career advice. Wishing you success!",
+        "Farewell! Keep exploring and growing in your career. Feel free to return anytime!",
+        "See you later! Your career journey is unique - embrace the opportunities ahead!"
+      ],
+      "context_set": "conversation_end"
+    },
+    "help": {
+      "patterns": [
+        "help",
+        "what can you do",
+        "how does this work",
+        "confused",
+        "guide me"
+      ],
+      "responses": [
+        "I'm here to help with all your career questions! I can assist with career options, skills, education, salary insights, and market trends.",
+        "I can help you with: career exploration, skill development plans, educational guidance, salary information, interview preparation, and job market insights!",
+        "Think of me as your career companion! Ask about anything related to career planning, professional development, or job market intelligence.",
+        "I'm designed to provide personalized career guidance for Indian students and professionals. What specific area would you like to explore?"
+      ],
+      "capabilities": [
+        "Career path recommendations based on your profile",
+        "Skills gap analysis and development roadmaps",
+        "Educational pathway guidance for all backgrounds",
+        "Salary insights by role, location, and experience",
+        "Job market trends and emerging opportunities",
+        "Interview preparation tips and strategies",
+        "Career transition planning and guidance"
+      ]
+    }
+  },
+  "context_responses": {
+    "career_inquiry_followup": [
+      "Based on what you've shared, here are some career options that might interest you...",
+      "Let me suggest some paths that align with your background and interests...",
+      "Considering your profile, these careers could be a great fit..."
+    ],
+    "skills_inquiry_followup": [
+      "Here are the key skills you should focus on for your target career...",
+      "Let me break down the skill requirements and learning path...",
+      "Based on your goals, here's a prioritized skill development plan..."
+    ],
+    "education_inquiry_followup": [
+      "Given your career interests, here are the educational paths I'd recommend...",
+      "Let me suggest some educational options that align with your goals...",
+      "Based on your profile, these learning paths could accelerate your career..."
+    ]
+  },
+  "quick_responses": {
+    "popular_careers": [
+      "Software Engineer - High demand, good growth, technical challenges",
+      "Data Scientist - Emerging field, analytical work, high impact",
+      "Product Manager - Strategic role, business focus, leadership opportunity",
+      "Digital Marketing Specialist - Creative work, business impact, growing field",
+      "Chartered Accountant - Professional expertise, stable career, diverse opportunities"
+    ],
+    "trending_skills": [
+      "Python Programming",
+      "Data Analysis",
+      "Digital Marketing",
+      "Cloud Computing",
+      "Machine Learning",
+      "Project Management",
+      "Communication Skills"
+    ],
+    "salary_ranges": {
+      "fresher": "₹3-8 LPA depending on role and company",
+      "experienced": "₹8-25 LPA based on skills and experience",
+      "senior": "₹25-50+ LPA for leadership roles"
+    }
+  },
+  "fallback_responses": [
+    "That's an interesting question! Could you provide more details so I can give you the most helpful career guidance?",
+    "I want to make sure I understand correctly. Could you rephrase your question or provide more context?",
+    "Let me help you better! What specific aspect of career planning are you most interested in?",
+    "I'm here to provide the best career guidance possible. Could you be more specific about what you'd like to know?",
+    "I understand you're looking for career advice. Let me help you step by step - what's your main concern right now?"
+  ],
+  "conversation_starters": [
+    "What career field interests you most?",
+    "Tell me about your educational background",
+    "What are your strongest skills?",
+    "Are you looking to start your career or make a change?",
+    "What type of work environment do you prefer?",
+    "Do you have any specific career goals in mind?"
+  ],
+  "regional_insights": {
+    "bangalore": "Known as India's Silicon Valley, excellent for tech careers, startup ecosystem, international companies",
+    "mumbai": "Financial capital, entertainment industry, high cost of living but great opportunities",
+    "delhi": "Government hub, diverse opportunities, good for policy and consulting roles",
+    "hyderabad": "Growing tech hub, HITEC City, government support for startups, lower costs",
+    "pune": "IT services hub, automotive industry, educational institutions, pleasant climate",
+    "chennai": "South India's Detroit, automotive and healthcare industries, IT services"
+  },
+  "industry_specific_advice": {
+    "technology": "Focus on programming, system design, and staying updated with latest technologies. Build a strong GitHub profile.",
+    "finance": "Develop analytical skills, understand financial markets, consider professional certifications like CFA or FRM.",
+    "healthcare": "Emphasize patient care, stay updated with medical advances, consider specialization based on interests.",
+    "marketing": "Build creative skills, understand digital platforms, develop data analysis capabilities, create a portfolio.",
+    "consulting": "Develop problem-solving skills, communication abilities, industry knowledge, and case study analysis."
+  }
+}

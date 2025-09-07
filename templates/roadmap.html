@@ -1,0 +1,1003 @@
+{% extends 'base.html' %}
+
+{% block title %}Learning Roadmap - Skillora AI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="roadmap-section">
+    <!-- Header -->
+    <div class="roadmap-header">
+      <div class="header-nav">
+        <a href="{{ url_for('dashboard') }}" class="back-btn">← Back to Dashboard</a>
+      </div>
+      
+      <div class="header-content">
+        <h1>🗺️ Your Learning Roadmap</h1>
+        {% if roadmap.get('career_target') %}
+        <p class="roadmap-subtitle">
+          Personalized path to become a <strong>{{ roadmap.career_title }}</strong>
+        </p>
+        {% endif %}
+        
+        {% if roadmap.get('timeline') %}
+        <div class="roadmap-summary">
+          <div class="summary-item">
+            <span class="summary-icon">⏱️</span>
+            <span class="summary-text">{{ roadmap.timeline.total_duration_months|round(1) }} months</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-icon">📚</span>
+            <span class="summary-text">{{ roadmap.learning_phases|length }} phases</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-icon">⭐</span>
+            <span class="summary-text">{{ roadmap.commitment_required.total_skills_to_learn }} skills</span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Roadmap Timeline -->
+    {% if roadmap.get('learning_phases') %}
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      
+      {% for phase in roadmap.learning_phases %}
+      <div class="timeline-phase" data-phase="{{ phase.phase_number }}">
+        <div class="phase-marker">
+          <span class="phase-number">{{ phase.phase_number }}</span>
+        </div>
+        
+        <div class="phase-content">
+          <div class="phase-header">
+            <h2>{{ phase.phase_name }}</h2>
+            <div class="phase-meta">
+              <span class="phase-duration">
+                📅 {{ phase.estimated_duration_weeks }} weeks
+              </span>
+              <span class="phase-priority priority-{{ phase.priority|lower }}">
+                {{ phase.priority }} Priority
+              </span>
+            </div>
+          </div>
+          
+          <p class="phase-description">{{ phase.phase_description }}</p>
+          
+          <!-- Skills to Learn -->
+          <div class="skills-section">
+            <h3>🎯 Skills You'll Master</h3>
+            <div class="skills-grid">
+              {% for skill in phase.skills_to_learn %}
+              <div class="skill-item">
+                <span class="skill-name">{{ skill }}</span>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          
+          <!-- Learning Objectives -->
+          {% if phase.get('learning_objectives') %}
+          <div class="objectives-section">
+            <h3>🎪 Learning Objectives</h3>
+            <ul class="objectives-list">
+              {% for objective in phase.learning_objectives %}
+              <li>{{ objective }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          
+          <!-- Recommended Approach -->
+          {% if phase.get('recommended_approach') %}
+          <div class="approach-section">
+            <h3>📖 Recommended Learning Approach</h3>
+            <div class="approach-card">
+              <div class="approach-item">
+                <strong>Method:</strong> {{ phase.recommended_approach.primary_method }}
+              </div>
+              <div class="approach-item">
+                <strong>Focus:</strong> {{ phase.recommended_approach.practice_focus }}
+              </div>
+              <div class="approach-item">
+                <strong>Assessment:</strong> {{ phase.recommended_approach.assessment_method }}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          
+          <!-- Prerequisites -->
+          {% if phase.get('prerequisites') %}
+          <div class="prerequisites-section">
+            <h3>📋 Prerequisites</h3>
+            <div class="prerequisites-list">
+              {% for prereq in phase.prerequisites %}
+              <span class="prerequisite-tag">{{ prereq }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Resource Recommendations -->
+    {% if roadmap.get('resource_recommendations') %}
+    <div class="resources-section">
+      <h2>📚 Learning Resources</h2>
+      
+      {% if roadmap.resource_recommendations.get('by_phase') %}
+      <div class="resources-by-phase">
+        {% for phase_resources in roadmap.resource_recommendations.by_phase %}
+        <div class="phase-resources">
+          <h3>Phase {{ phase_resources.phase_number }}: {{ phase_resources.phase_name }}</h3>
+          
+          {% if phase_resources.resources %}
+          <div class="resources-grid">
+            {% for resource in phase_resources.resources %}
+            <div class="resource-card">
+              <div class="resource-header">
+                <h4>{{ resource.name or resource.title }}</h4>
+                <span class="resource-type">{{ resource.type|title if resource.type else 'Resource' }}</span>
+              </div>
+              
+              <div class="resource-content">
+                {% if resource.description %}
+                <p class="resource-description">{{ resource.description }}</p>
+                {% endif %}
+                
+                <div class="resource-meta">
+                  {% if resource.cost %}
+                  <span class="resource-cost cost-{{ resource.cost|lower }}">
+                    {{ resource.cost|title }}
+                  </span>
+                  {% endif %}
+                  
+                  {% if resource.duration %}
+                  <span class="resource-duration">{{ resource.duration }}</span>
+                  {% endif %}
+                </div>
+                
+                {% if resource.url %}
+                <a href="{{ resource.url }}" target="_blank" class="resource-link">
+                  📎 Access Resource
+                </a>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Overall Recommendations -->
+      {% if roadmap.resource_recommendations.get('overall_recommendations') %}
+      <div class="overall-resources">
+        <div class="resources-categories">
+          
+          {% if roadmap.resource_recommendations.overall_recommendations.free_resources %}
+          <div class="resource-category">
+            <h3>🆓 Free Resources</h3>
+            <div class="resource-list">
+              {% for resource in roadmap.resource_recommendations.overall_recommendations.free_resources[:5] %}
+              <div class="resource-item">
+                <span class="resource-name">{{ resource.name or resource.title }}</span>
+                {% if resource.url %}
+                <a href="{{ resource.url }}" target="_blank" class="resource-action">Visit</a>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if roadmap.resource_recommendations.overall_recommendations.online_platforms %}
+          <div class="resource-category">
+            <h3>💻 Online Platforms</h3>
+            <div class="resource-list">
+              {% for resource in roadmap.resource_recommendations.overall_recommendations.online_platforms[:5] %}
+              <div class="resource-item">
+                <span class="resource-name">{{ resource.name or resource.title }}</span>
+                {% if resource.url %}
+                <a href="{{ resource.url }}" target="_blank" class="resource-action">Visit</a>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if roadmap.resource_recommendations.overall_recommendations.books %}
+          <div class="resource-category">
+            <h3>📖 Recommended Books</h3>
+            <div class="resource-list">
+              {% for resource in roadmap.resource_recommendations.overall_recommendations.books[:5] %}
+              <div class="resource-item">
+                <span class="resource-name">{{ resource.name or resource.title }}</span>
+                {% if resource.author %}
+                <small class="resource-author">by {{ resource.author }}</small>
+                {% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Milestones -->
+    {% if roadmap.get('milestones') %}
+    <div class="milestones-section">
+      <h2>🏆 Key Milestones</h2>
+      
+      <div class="milestones-grid">
+        {% for milestone in roadmap.milestones %}
+        <div class="milestone-card">
+          <div class="milestone-header">
+            <h3>{{ milestone.title }}</h3>
+            <span class="milestone-date">{{ milestone.target_date }}</span>
+          </div>
+          
+          <p class="milestone-description">{{ milestone.description }}</p>
+          
+          {% if milestone.success_criteria %}
+          <div class="success-criteria">
+            <h4>Success Criteria:</h4>
+            <ul>
+              {% for criteria in milestone.success_criteria %}
+              <li>{{ criteria }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          
+          {% if milestone.reward %}
+          <div class="milestone-reward">
+            <strong>🎁 Reward:</strong> {{ milestone.reward }}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Commitment Information -->
+    {% if roadmap.get('commitment_required') %}
+    <div class="commitment-section">
+      <h2>💪 Time Commitment</h2>
+      
+      <div class="commitment-overview">
+        <div class="commitment-stats">
+          <div class="stat-item">
+            <span class="stat-number">{{ roadmap.commitment_required.total_learning_hours }}</span>
+            <span class="stat-label">Total Hours</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-number">{{ roadmap.commitment_required.average_hours_per_week }}</span>
+            <span class="stat-label">Hours/Week</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-number commitment-{{ roadmap.commitment_required.commitment_level|lower }}">
+              {{ roadmap.commitment_required.commitment_level }}
+            </span>
+            <span class="stat-label">Commitment Level</span>
+          </div>
+        </div>
+        
+        <div class="commitment-advice">
+          <h3>💡 Our Recommendation</h3>
+          <p>{{ roadmap.commitment_required.recommendation }}</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Action Buttons -->
+    <div class="action-section">
+      <div class="action-buttons">
+        <a href="{{ url_for('chatbot_page') }}" class="btn btn-primary btn-lg">
+          💬 Discuss This Roadmap with AI
+        </a>
+        <button onclick="window.print()" class="btn btn-secondary btn-lg">
+          🖨️ Download Roadmap
+        </button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline btn-lg">
+          🔄 Explore Other Careers
+        </a>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    {% if roadmap.get('error') %}
+    <div class="error-state">
+      <div class="error-content">
+        <h2>⚠️ Unable to Generate Roadmap</h2>
+        <p>{{ roadmap.error }}</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<style>
+.roadmap-section {
+  padding: 2rem 0;
+}
+
+.roadmap-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header-nav {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.back-btn {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.roadmap-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.roadmap-summary {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+}
+
+.summary-icon {
+  font-size: 1.25rem;
+}
+
+.summary-text {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.timeline-container {
+  position: relative;
+  margin: 3rem 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+}
+
+.timeline-phase {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 5rem;
+}
+
+.phase-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4rem;
+  height: 4rem;
+  background: var(--primary-color);
+  border: 4px solid var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+}
+
+.phase-number {
+  color: white;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.phase-content {
+  background: var(--bg-primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--primary-color);
+}
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.phase-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+
+.phase-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.phase-duration {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.phase-priority {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.priority-critical {
+  background: var(--error-color);
+  color: white;
+}
+
+.priority-important {
+  background: var(--warning-color);
+  color: white;
+}
+
+.priority-preferred {
+  background: var(--primary-color);
+  color: white;
+}
+
+.phase-description {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.skills-section,
+.objectives-section,
+.approach-section,
+.prerequisites-section {
+  margin-bottom: 1.5rem;
+}
+
+.skills-section h3,
+.objectives-section h3,
+.approach-section h3,
+.prerequisites-section h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-item {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.objectives-list {
+  list-style: none;
+  padding: 0;
+}
+
+.objectives-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.objectives-list li:last-child {
+  border-bottom: none;
+}
+
+.objectives-list li::before {
+  content: "🎯";
+  position: absolute;
+  left: 0;
+}
+
+.approach-card {
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.approach-item {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.approach-item:last-child {
+  margin-bottom: 0;
+}
+
+.prerequisites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prerequisite-tag {
+  background: var(--border-color);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+.resources-section {
+  margin: 3rem 0;
+}
+
+.resources-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.phase-resources {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+}
+
+.phase-resources h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary-color);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.resource-card {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.resource-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.resource-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.resource-type {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.resource-description {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.resource-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.resource-cost {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.cost-free {
+  background: var(--success-color);
+  color: white;
+}
+
+.cost-paid {
+  background: var(--warning-color);
+  color: white;
+}
+
+.cost-freemium {
+  background: var(--primary-color);
+  color: white;
+}
+
+.resource-duration {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.resource-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.resource-link:hover {
+  text-decoration: underline;
+}
+
+.resources-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.resource-category {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.resource-category h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.resource-list {
+  space-y: 0.5rem;
+}
+
+.resource-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.resource-item:last-child {
+  border-bottom: none;
+}
+
+.resource-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.resource-author {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+.resource-action {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.milestones-section {
+  margin: 3rem 0;
+}
+
+.milestones-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.milestone-card {
+  background: var(--bg-primary);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--warning-color);
+}
+
+.milestone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.milestone-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.milestone-date {
+  background: var(--warning-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.milestone-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.success-criteria h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.success-criteria ul {
+  list-style: none;
+  padding: 0;
+}
+
+.success-criteria li {
+  padding: 0.25rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.success-criteria li::before {
+  content: "✅";
+  position: absolute;
+  left: 0;
+}
+
+.milestone-reward {
+  background: var(--success-color);
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.commitment-section {
+  background: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 3rem 0;
+}
+
+.commitment-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+}
+
+.commitment-overview {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.commitment-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  background: var(--bg-primary);
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.commitment-high {
+  color: var(--error-color);
+}
+
+.commitment-medium {
+  color: var(--warning-color);
+}
+
+.commitment-low {
+  color: var(--success-color);
+}
+
+.commitment-advice {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+}
+
+.commitment-advice h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary-color);
+}
+
+.commitment-advice p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.action-section {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+}
+
+.error-content h2 {
+  color: var(--error-color);
+  margin-bottom: 1rem;
+}
+
+.error-content p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .roadmap-summary {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timeline-phase {
+    padding-left: 3rem;
+  }
+  
+  .phase-marker {
+    width: 3rem;
+    height: 3rem;
+  }
+  
+  .phase-number {
+    font-size: 1rem;
+  }
+  
+  .phase-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .resources-categories {
+    grid-template-columns: 1fr;
+  }
+  
+  .milestones-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .commitment-overview {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .milestone-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .header-nav,
+  .action-section {
+    display: none;
+  }
+  
+  .timeline-phase {
+    page-break-inside: avoid;
+  }
+  
+  .phase-content {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
+</style>
+{% endblock %}

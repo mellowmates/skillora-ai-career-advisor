@@ -1,0 +1,156 @@
+{
+  "big_five_model": {
+    "openness": {
+      "description": "Openness to experience - creativity, curiosity, intellectual pursuits",
+      "facets": ["Fantasy", "Aesthetics", "Feelings", "Actions", "Ideas", "Values"],
+      "career_correlations": {
+        "high_openness": {
+          "best_matches": [
+            {"career": "software_engineer", "correlation": 0.75, "reason": "Problem-solving creativity"},
+            {"career": "data_scientist", "correlation": 0.85, "reason": "Research and exploration"},
+            {"career": "product_manager", "correlation": 0.80, "reason": "Innovation and strategy"},
+            {"career": "ux_designer", "correlation": 0.90, "reason": "Creative problem-solving"},
+            {"career": "research_scientist", "correlation": 0.95, "reason": "Intellectual curiosity"},
+            {"career": "entrepreneur", "correlation": 0.85, "reason": "Innovation and risk-taking"}
+          ],
+          "avoid": ["routine_administrative", "traditional_manufacturing", "strict_compliance_roles"]
+        },
+        "low_openness": {
+          "best_matches": [
+            {"career": "chartered_accountant", "correlation": 0.70, "reason": "Structured processes"},
+            {"career": "operations_manager", "correlation": 0.75, "reason": "Systematic approach"},
+            {"career": "bank_manager", "correlation": 0.65, "reason": "Established procedures"},
+            {"career": "quality_analyst", "correlation": 0.80, "reason": "Attention to standards"}
+          ],
+          "characteristics": ["Prefer routine", "Value tradition", "Practical approach"]
+        }
+      }
+    },
+    "conscientiousness": {
+      "description": "Self-discipline, organization, goal-oriented behavior",
+      "facets": ["Competence", "Order", "Dutifulness", "Achievement", "Self-Discipline", "Deliberation"],
+      "career_correlations": {
+        "high_conscientiousness": {
+          "best_matches": [
+            {"career": "chartered_accountant", "correlation": 0.90, "reason": "Precision and compliance"},
+            {"career": "project_manager", "correlation": 0.85, "reason": "Planning and organization"},
+            {"career": "software_engineer", "correlation": 0.75, "reason": "Systematic development"},
+            {"career": "data_scientist", "correlation": 0.80, "reason": "Methodical analysis"},
+            {"career": "operations_manager", "correlation": 0.85, "reason": "Process optimization"},
+            {"career": "quality_assurance", "correlation": 0.90, "reason": "Attention to detail"}
+          ],
+          "advantages": ["Reliable delivery", "High quality work", "Goal achievement"]
+        },
+        "low_conscientiousness": {
+          "best_matches": [
+            {"career": "creative_director", "correlation": 0.60, "reason": "Flexible creativity"},
+            {"career": "sales_representative", "correlation": 0.55, "reason": "Spontaneous interactions"},
+            {"career": "journalist", "correlation": 0.65, "reason": "Adaptable deadlines"}
+          ],
+          "challenges": ["Meeting deadlines", "Detailed work", "Long-term planning"]
+        }
+      }
+    },
+    "extraversion": {
+      "description": "Sociability, assertiveness, energy in social situations",
+      "facets": ["Warmth", "Gregariousness", "Assertiveness", "Activity", "Excitement", "Positive Emotions"],
+      "career_correlations": {
+        "high_extraversion": {
+          "best_matches": [
+            {"career": "sales_manager", "correlation": 0.90, "reason": "People interaction"},
+            {"career": "product_manager", "correlation": 0.80, "reason": "Stakeholder management"},
+            {"career": "digital_marketing_specialist", "correlation": 0.75, "reason": "Brand interaction"},
+            {"career": "business_development", "correlation": 0.85, "reason": "Relationship building"},
+            {"career": "team_leader", "correlation": 0.80, "reason": "Team motivation"},
+            {"career": "consultant", "correlation": 0.85, "reason": "Client interaction"}
+          ],
+          "strengths": ["Networking", "Team leadership", "Client relations", "Presentations"]
+        },
+        "low_extraversion": {
+          "best_matches": [
+            {"career": "software_engineer", "correlation": 0.70, "reason": "Independent work"},
+            {"career": "data_scientist", "correlation": 0.75, "reason": "Analytical focus"},
+            {"career": "research_scientist", "correlation": 0.85, "reason": "Deep work"},
+            {"career": "technical_writer", "correlation": 0.80, "reason": "Individual contribution"},
+            {"career": "accountant", "correlation": 0.75, "reason": "Detail-oriented work"}
+          ],
+          "strengths": ["Deep focus", "Independent work", "Analytical thinking", "Writing"]
+        }
+      }
+    },
+    "agreeableness": {
+      "description": "Cooperation, trust, empathy, altruism",
+      "facets": ["Trust", "Straightforwardness", "Altruism", "Compliance", "Modesty", "Tender-mindedness"],
+      "career_correlations": {
+        "high_agreeableness": {
+          "best_matches": [
+            {"career": "human_resources", "correlation": 0.85, "reason": "Employee welfare"},
+            {"career": "counselor", "correlation": 0.90, "reason": "Helping others"},
+            {"career": "teacher", "correlation": 0.80, "reason": "Student development"},
+            {"career": "healthcare_worker", "correlation": 0.85, "reason": "Patient care"},
+            {"career": "customer_success", "correlation": 0.80, "reason": "Client satisfaction"},
+            {"career": "nonprofit_worker", "correlation": 0.90, "reason": "Social impact"}
+          ],
+          "strengths": ["Team harmony", "Conflict resolution", "Customer service", "Mentoring"]
+        },
+        "low_agreeableness": {
+          "best_matches": [
+            {"career": "ceo", "correlation": 0.65, "reason": "Tough decisions"},
+            {"career": "lawyer", "correlation": 0.70, "reason": "Competitive advocacy"},
+            {"career": "investment_banker", "correlation": 0.75, "reason": "Aggressive deals"},
+            {"career": "entrepreneur", "correlation": 0.70, "reason": "Risk-taking"}
+          ],
+          "strengths": ["Tough negotiation", "Direct feedback", "Competitive drive"]
+        }
+      }
+    },
+    "neuroticism": {
+      "description": "Emotional stability, stress tolerance, anxiety levels",
+      "facets": ["Anxiety", "Hostility", "Depression", "Self-consciousness", "Impulsiveness", "Vulnerability"],
+      "career_correlations": {
+        "low_neuroticism": {
+          "best_matches": [
+            {"career": "emergency_responder", "correlation": 0.90, "reason": "Stress management"},
+            {"career": "surgeon", "correlation": 0.85, "reason": "High-pressure decisions"},
+            {"career": "pilot", "correlation": 0.90, "reason": "Safety-critical role"},
+            {"career": "ceo", "correlation": 0.80, "reason": "Leadership under pressure"},
+            {"career": "trader", "correlation": 0.85, "reason": "Market volatility"},
+            {"career": "project_manager", "correlation": 0.75, "reason": "Deadline pressure"}
+          ],
+          "advantages": ["Stress tolerance", "Calm decision-making", "Leadership resilience"]
+        },
+        "high_neuroticism": {
+          "suitable_matches": [
+            {"career": "creative_writer", "correlation": 0.60, "reason": "Emotional expression"},
+            {"career": "researcher", "correlation": 0.65, "reason": "Methodical environment"},
+            {"career": "technical_specialist", "correlation": 0.70, "reason": "Specialized expertise"}
+          ],
+          "support_needed": ["Stress management", "Work-life balance", "Supportive environment"],
+          "avoid": ["High-stress leadership", "Emergency response", "High-stakes trading"]
+        }
+      }
+    }
+  },
+  "personality_combinations": {
+    "analytical_innovator": {
+      "traits": {"openness": "high", "conscientiousness": "high", "extraversion": "medium"},
+      "best_careers": ["data_scientist", "research_scientist", "product_manager", "software_architect"],
+      "description": "Creative problem-solver with systematic approach"
+    },
+    "people_leader": {
+      "traits": {"extraversion": "high", "agreeableness": "high", "conscientiousness": "high"},
+      "best_careers": ["hr_manager", "team_leader", "consultant", "training_manager"],
+      "description": "Natural leader focused on team success"
+    },
+    "detail_oriented_specialist": {
+      "traits": {"conscientiousness": "high", "openness": "medium", "neuroticism": "low"},
+      "best_careers": ["chartered_accountant", "quality_analyst", "compliance_officer", "technical_writer"],
+      "description": "Precise professional with deep expertise"
+    },
+    "creative_communicator": {
+      "traits": {"openness": "high", "extraversion": "high", "agreeableness": "medium"},
+      "best_careers": ["digital_marketing_specialist", "content_creator", "ux_designer", "brand_manager"],
+      "description": "Creative professional with strong communication"
+    }
+  }
+}

@@ -1,0 +1,779 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ career_data.get('title', 'Career Details') }} - Skillora AI{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="career-detail-section">
+    <!-- Career Header -->
+    <div class="career-header">
+      <div class="career-nav">
+        <a href="{{ url_for('dashboard') }}" class="back-btn">
+          ← Back to Dashboard
+        </a>
+      </div>
+      
+      <div class="career-hero">
+        <div class="career-info">
+          <h1>{{ career_data.get('title', 'Career Title') }}</h1>
+          <div class="career-meta">
+            <span class="category">{{ career_data.get('category', 'General')|title }}</span>
+            <span class="separator">•</span>
+            <span class="growth-outlook">{{ career_data.get('growth_outlook', 'Medium') }} Growth</span>
+          </div>
+          <p class="career-summary">{{ career_data.get('description', 'Career description not available.') }}</p>
+        </div>
+        
+        {% if explanation.get('overall_score') %}
+        <div class="match-indicator">
+          <div class="match-circle">
+            <span class="match-percentage">{{ (explanation.overall_score * 100)|round }}%</span>
+            <span class="match-label">Match</span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Key Information Cards -->
+    <div class="info-cards-grid">
+      <div class="info-card salary-card">
+        <div class="card-icon">💰</div>
+        <div class="card-content">
+          <h3>Salary Range</h3>
+          {% if explanation.get('salary_range') %}
+          <div class="salary-range">
+            <span class="salary-amount">{{ explanation.salary_range.formatted }}</span>
+            <small class="salary-note">Based on your experience level</small>
+          </div>
+          {% else %}
+          <p class="no-data">Salary information not available</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="info-card growth-card">
+        <div class="card-icon">📈</div>
+        <div class="card-content">
+          <h3>Growth Outlook</h3>
+          <div class="growth-info">
+            <span class="growth-level growth-{{ career_data.get('growth_outlook', 'medium')|lower }}">
+              {{ career_data.get('growth_outlook', 'Medium') }}
+            </span>
+            <small class="growth-description">Job market projection</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card availability-card">
+        <div class="card-icon">🎯</div>
+        <div class="card-content">
+          <h3>Job Availability</h3>
+          <div class="availability-info">
+            <span class="availability-level">{{ career_data.get('job_availability', 'Medium') }}</span>
+            <small class="availability-note">Current market demand</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card experience-card">
+        <div class="card-icon">⭐</div>
+        <div class="card-content">
+          <h3>Experience Level</h3>
+          <div class="experience-info">
+            <span class="experience-level">{{ career_data.get('experience_level', 'All Levels') }}</span>
+            <small class="experience-note">Typical entry requirements</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Analysis -->
+    <div class="analysis-section">
+      <div class="analysis-grid">
+        
+        <!-- Skills Analysis -->
+        {% if explanation.get('detailed_analysis', {}).get('skill_analysis') %}
+        <div class="analysis-card">
+          <div class="card-header">
+            <h3>🛠️ Skills Analysis</h3>
+          </div>
+          <div class="card-content">
+            {% set skill_analysis = explanation.detailed_analysis.skill_analysis %}
+            
+            <div class="skills-overview">
+              <div class="skills-match-score">
+                <span class="score">{{ skill_analysis.skill_match_percentage|round(1) }}%</span>
+                <span class="label">Skills Match</span>
+              </div>
+            </div>
+
+            {% if skill_analysis.matching_skills %}
+            <div class="skills-group">
+              <h4>✅ Your Matching Skills</h4>
+              <div class="skills-tags">
+                {% for skill in skill_analysis.matching_skills %}
+                <span class="skill-tag matching">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+
+            {% if skill_analysis.missing_critical %}
+            <div class="skills-group">
+              <h4>🎯 Critical Skills to Develop</h4>
+              <div class="skills-tags">
+                {% for skill in skill_analysis.missing_critical %}
+                <span class="skill-tag critical">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+
+            {% if skill_analysis.missing_important %}
+            <div class="skills-group">
+              <h4>📚 Important Skills to Learn</h4>
+              <div class="skills-tags">
+                {% for skill in skill_analysis.missing_important %}
+                <span class="skill-tag important">{{ skill }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Personality Fit -->
+        {% if explanation.get('detailed_analysis', {}).get('personality_fit') %}
+        <div class="analysis-card">
+          <div class="card-header">
+            <h3>🧠 Personality Fit</h3>
+          </div>
+          <div class="card-content">
+            {% set personality_fit = explanation.detailed_analysis.personality_fit %}
+            
+            <div class="fit-overview">
+              <div class="fit-score">
+                <span class="score">{{ personality_fit.fit_score|round(2) }}</span>
+                <span class="label">Fit Score</span>
+              </div>
+              <div class="fit-level fit-{{ personality_fit.overall_fit|lower }}">
+                {{ personality_fit.overall_fit }} Fit
+              </div>
+            </div>
+
+            {% if personality_fit.strengths %}
+            <div class="personality-group">
+              <h4>💪 Your Strengths</h4>
+              <ul class="personality-list">
+                {% for strength in personality_fit.strengths %}
+                <li class="strength-item">{{ strength }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+
+            {% if personality_fit.areas_to_develop %}
+            <div class="personality-group">
+              <h4>🌱 Areas for Development</h4>
+              <ul class="personality-list">
+                {% for area in personality_fit.areas_to_develop %}
+                <li class="development-item">{{ area }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <!-- Market Insights -->
+        {% if explanation.get('detailed_analysis', {}).get('market_insights') %}
+        <div class="analysis-card">
+          <div class="card-header">
+            <h3>📊 Market Insights</h3>
+          </div>
+          <div class="card-content">
+            {% set market_insights = explanation.detailed_analysis.market_insights %}
+            
+            <div class="market-stats">
+              <div class="market-stat">
+                <span class="stat-label">Growth Rate</span>
+                <span class="stat-value">{{ market_insights.growth_rate }}%</span>
+              </div>
+              
+              <div class="market-stat">
+                <span class="stat-label">Demand Level</span>
+                <span class="stat-value demand-{{ market_insights.demand_level|lower }}">
+                  {{ market_insights.demand_level|title }}
+                </span>
+              </div>
+              
+              {% if market_insights.job_count %}
+              <div class="market-stat">
+                <span class="stat-label">Available Jobs</span>
+                <span class="stat-value">{{ market_insights.job_count }}</span>
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="market-outlook">
+              <h4>Market Outlook</h4>
+              <p>{{ market_insights.outlook }} growth expected in this sector.</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Career Requirements -->
+    {% if career_data.get('required_skills') %}
+    <div class="requirements-section">
+      <h2>📋 Career Requirements</h2>
+      
+      <div class="requirements-grid">
+        {% if career_data.required_skills.get('critical') %}
+        <div class="requirement-card">
+          <h3>🎯 Critical Skills</h3>
+          <div class="skills-list">
+            {% for skill in career_data.required_skills.critical %}
+            <span class="requirement-skill critical">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if career_data.required_skills.get('important') %}
+        <div class="requirement-card">
+          <h3>📚 Important Skills</h3>
+          <div class="skills-list">
+            {% for skill in career_data.required_skills.important %}
+            <span class="requirement-skill important">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if career_data.required_skills.get('preferred') %}
+        <div class="requirement-card">
+          <h3>⭐ Preferred Skills</h3>
+          <div class="skills-list">
+            {% for skill in career_data.required_skills.preferred %}
+            <span class="requirement-skill preferred">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Education Requirements -->
+    {% if career_data.get('education') %}
+    <div class="education-section">
+      <h2>🎓 Education Requirements</h2>
+      
+      <div class="education-grid">
+        {% if career_data.education.get('minimum') %}
+        <div class="education-card">
+          <h3>Minimum Education</h3>
+          <ul>
+            {% for edu in career_data.education.minimum %}
+            <li>{{ edu }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if career_data.education.get('preferred') %}
+        <div class="education-card">
+          <h3>Preferred Education</h3>
+          <ul>
+            {% for edu in career_data.education.preferred %}
+            <li>{{ edu }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if career_data.education.get('certifications') %}
+        <div class="education-card">
+          <h3>Valuable Certifications</h3>
+          <ul>
+            {% for cert in career_data.education.certifications %}
+            <li>{{ cert }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Action Buttons -->
+    <div class="action-section">
+      <div class="action-buttons">
+        <a href="{{ url_for('roadmap', career_id=career_data.get('id', '')) }}" class="btn btn-primary btn-lg">
+          🗺️ Create Learning Roadmap
+        </a>
+        <a href="{{ url_for('chatbot_page') }}" class="btn btn-secondary btn-lg">
+          💬 Ask AI About This Career
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline">
+          🔄 Explore Other Careers
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.career-detail-section {
+  padding: 2rem 0;
+}
+
+.career-header {
+  margin-bottom: 3rem;
+}
+
+.career-nav {
+  margin-bottom: 1rem;
+}
+
+.back-btn {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+  color: var(--secondary-color);
+}
+
+.career-hero {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  padding: 3rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.career-info h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.career-meta {
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.category {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+}
+
+.separator {
+  margin: 0 0.5rem;
+}
+
+.career-summary {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 600px;
+}
+
+.match-indicator {
+  text-align: center;
+}
+
+.match-circle {
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-percentage {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.match-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.info-card {
+  background: var(--bg-primary);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-icon {
+  font-size: 2.5rem;
+}
+
+.card-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.salary-amount {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--success-color);
+}
+
+.salary-note {
+  display: block;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.growth-level {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.growth-high { background: var(--success-color); color: white; }
+.growth-medium { background: var(--warning-color); color: white; }
+.growth-low { background: var(--error-color); color: white; }
+
+.analysis-section {
+  margin-bottom: 3rem;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.analysis-card {
+  background: var(--bg-primary);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-header h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.skills-overview {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.skills-match-score {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--success-color);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+}
+
+.skills-match-score .score {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.skills-match-score .label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.skills-group {
+  margin-bottom: 1.5rem;
+}
+
+.skills-group h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-primary);
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.skill-tag.matching {
+  background: var(--success-color);
+  color: white;
+}
+
+.skill-tag.critical {
+  background: var(--error-color);
+  color: white;
+}
+
+.skill-tag.important {
+  background: var(--warning-color);
+  color: white;
+}
+
+.fit-overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.fit-score {
+  text-align: center;
+}
+
+.fit-score .score {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.fit-score .label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.fit-level {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  font-weight: 600;
+}
+
+.fit-good { background: var(--success-color); color: white; }
+.fit-moderate { background: var(--warning-color); color: white; }
+.fit-developing { background: var(--error-color); color: white; }
+
+.personality-list {
+  list-style: none;
+  padding: 0;
+}
+
+.personality-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.personality-list li:last-child {
+  border-bottom: none;
+}
+
+.strength-item::before {
+  content: "✅ ";
+  margin-right: 0.5rem;
+}
+
+.development-item::before {
+  content: "🌱 ";
+  margin-right: 0.5rem;
+}
+
+.market-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.market-stat {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: 0.5rem;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.demand-high { color: var(--success-color); }
+.demand-medium { color: var(--warning-color); }
+.demand-low { color: var(--error-color); }
+
+.requirements-section,
+.education-section {
+  margin-bottom: 3rem;
+}
+
+.requirements-grid,
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.requirement-card,
+.education-card {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.requirement-card h3,
+.education-card h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.requirement-skill {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 2px solid;
+}
+
+.requirement-skill.critical {
+  border-color: var(--error-color);
+  color: var(--error-color);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.requirement-skill.important {
+  border-color: var(--warning-color);
+  color: var(--warning-color);
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.requirement-skill.preferred {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.education-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.education-card li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.education-card li:last-child {
+  border-bottom: none;
+}
+
+.education-card li::before {
+  content: "🎓 ";
+  margin-right: 0.5rem;
+}
+
+.action-section {
+  text-align: center;
+  padding: 3rem 0;
+  background: var(--bg-secondary);
+  border-radius: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .career-hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .career-info h1 {
+    font-size: 2rem;
+  }
+  
+  .analysis-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .market-stats {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+{% endblock %}
