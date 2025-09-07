@@ -288,10 +288,10 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 
 | Name | Role | Email |
 |------|------|-------|
-| **Omprakash Panda** | Team Leader & Full-Stack Developer | omprakash11273@gmail.com |
-| **Vishwajith Chakravarthy** | ML Engineer & Data Scientist | krishivishwajith@gmail.com |
-| **Vittal Bhajantri** | Backend Developer & DevOps | vittalgb2005@gmail.com |
-| **Sindhu B L** | Frontend Developer & UI/UX | sindhublava3105@gmail.com |
+| **Omprakash Panda** | Team Leader & AI/ML Development | omprakash11273@gmail.com |
+| **Vishwajith Chakravarthy** | Testing, Documentation & Presentation | krishivishwajith@gmail.com |
+| **Vittal Bhajantri** | Backend Integration | vittalgb2005@gmail.com |
+| **Sindhu B L** | Frontend & UI/UX | sindhublava3105@gmail.com |
 
 ## 🏆 Hackathon Details
 
@@ -338,9 +338,8 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 ## 📞 Contact & Support
 
 - **Team Email**: omprakash11273@gmail.com
-- **Project Repository**: [GitHub Link]
+- **Project Repository**: [https://github.com/mellowmates/skillora-ai-career-advisor]
 - **Demo Video**: [Coming Soon]
-- **Live Demo**: [Deployment Link]
 
 ## 🙏 Acknowledgments
 
@@ -354,4 +353,4 @@ CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
 **Built with ❤️ by The Algorithmic Alchemists**  
 *Empowering Indian students with AI-driven career guidance*
 
-**GenAI Exchange Hackathon 2024 Submission**
+**GenAI Exchange Hackathon 2025 Submission**
