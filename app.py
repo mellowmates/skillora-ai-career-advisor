@@ -36,6 +36,8 @@ if MODULES_AVAILABLE:
         learning_roadmap = LearningRoadmap(data_loader)
         market_analyzer = MarketAnalyzer(data_loader)
         chatbot_api = ChatbotAPI(data_loader)
+        # Connect ML models to chatbot for enhanced responses
+        chatbot_api.set_ml_models(career_matcher, skills_assessor, market_analyzer)
         print("✅ All modules initialized successfully")
     except Exception as e:
         print(f"⚠️ Warning: Module initialization failed: {e}")
@@ -162,7 +164,51 @@ def dashboard():
 @app.route('/career/<career_id>')
 def career_detail(career_id):
     """Career details page"""
-    return render_template('career_detail.html', career_id=career_id)
+    try:
+        # Get career details from career matcher
+        if career_matcher:
+            career_data = career_matcher.get_career_details(career_id)
+        else:
+            # Fallback career data
+            career_data = {
+                'career_id': career_id,
+                'title': career_id.replace('_', ' ').title(),
+                'description': f'Detailed information about {career_id.replace("_", " ")} career',
+                'required_skills': ['Skill 1', 'Skill 2', 'Skill 3'],
+                'education_requirements': ['Bachelor\'s degree in relevant field'],
+                'growth_prospects': 'Good',
+                'salary_range': {'min': 500000, 'max': 1000000, 'currency': 'INR'},
+                'work_environment': 'office_remote'
+            }
+        
+        if not career_data:
+            career_data = {
+                'career_id': career_id,
+                'title': 'Career Not Found',
+                'description': 'This career information is not available.',
+                'required_skills': [],
+                'education_requirements': [],
+                'growth_prospects': 'Unknown',
+                'salary_range': {'min': 0, 'max': 0, 'currency': 'INR'},
+                'work_environment': 'unknown'
+            }
+        
+        return render_template('career_detail.html', career_id=career_id, career_data=career_data)
+        
+    except Exception as e:
+        print(f"Error loading career details: {e}")
+        # Return with minimal data
+        career_data = {
+            'career_id': career_id,
+            'title': 'Career Details',
+            'description': 'Unable to load career information.',
+            'required_skills': [],
+            'education_requirements': [],
+            'growth_prospects': 'Unknown',
+            'salary_range': {'min': 0, 'max': 0, 'currency': 'INR'},
+            'work_environment': 'unknown'
+        }
+        return render_template('career_detail.html', career_id=career_id, career_data=career_data)
 
 @app.route('/roadmap')
 def roadmap():
@@ -454,7 +500,18 @@ def chatbot_message():
         conversation_id = data.get('conversation_id', 'default')
         
         if chatbot_api:
-            response_data = chatbot_api.process_message(message, session.get('profile', {}), conversation_id)
+            # Pass comprehensive user data for ML enhancement
+            user_data = {
+                'personality': session.get('personality', {}),
+                'skills': session.get('skills', {}),
+                'profile': session.get('profile', {}),
+                'preferences': session.get('preferences', {})
+            }
+            response_data = chatbot_api.process_message(
+                message, 
+                user_data, 
+                conversation_id
+            )
         else:
             # Fallback chatbot response
             response_data = {

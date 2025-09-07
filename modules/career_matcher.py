@@ -44,14 +44,29 @@ class CareerMatcher:
             # Load career recommendation model
             career_model_path = 'models/trained_models/career_model.pkl'
             if os.path.exists(career_model_path):
-                self.career_model = joblib.load(career_model_path)
-                print("✅ Career recommendation model loaded successfully")
+                model_data = joblib.load(career_model_path)
+                if isinstance(model_data, dict) and 'model' in model_data:
+                    self.career_model = model_data['model']
+                    self.career_model_data = model_data  # Store full data for reference
+                    print(f"✅ Career recommendation model loaded successfully")
+                    print(f"🔍 Model type: {type(self.career_model)}")
+                    if hasattr(self.career_model, 'classes_'):
+                        print(f"📋 Model classes: {self.career_model.classes_}")
+                else:
+                    self.career_model = model_data
+                    print(f"✅ Career recommendation model loaded successfully")
             
             # Load salary prediction model
             salary_model_path = 'models/trained_models/salary_model.pkl'
             if os.path.exists(salary_model_path):
-                self.salary_model = joblib.load(salary_model_path)
-                print("✅ Salary prediction model loaded successfully")
+                model_data = joblib.load(salary_model_path)
+                if isinstance(model_data, dict) and 'model' in model_data:
+                    self.salary_model = model_data['model']
+                    self.salary_model_data = model_data
+                    print(f"✅ Salary prediction model loaded successfully")
+                else:
+                    self.salary_model = model_data
+                    print(f"✅ Salary prediction model loaded successfully")
                 
         except Exception as e:
             print(f"⚠️ Failed to load ML models: {e}")
@@ -176,8 +191,11 @@ class CareerMatcher:
         """
         try:
             if self.career_model:
+                print(f"🔍 Using ML model for career recommendations")
+                print(f"📊 User profile keys: {list(user_profile.keys())}")
                 return self._ml_based_recommendations(user_profile)
             else:
+                print(f"⚠️ No ML model available, using rule-based recommendations")
                 return self._rule_based_recommendations(user_profile)
                 
         except Exception as e:
@@ -189,11 +207,14 @@ class CareerMatcher:
         try:
             # Prepare features for the model
             features = self._prepare_features_for_model(user_profile)
+            print(f"🔧 Prepared features: {features.columns.tolist()}")
+            print(f"📈 Feature values: {features.iloc[0].to_dict()}")
             
             # Get predictions from the career model
             if hasattr(self.career_model, 'predict_proba'):
                 career_probabilities = self.career_model.predict_proba(features)[0]
                 career_classes = self.career_model.classes_
+                print(f"🎯 ML predictions: {dict(zip(career_classes, career_probabilities))}")
             else:
                 # Fallback to simple prediction
                 predictions = self.career_model.predict(features)
@@ -201,6 +222,7 @@ class CareerMatcher:
                 career_probabilities = np.zeros(len(career_classes))
                 for i, cls in enumerate(career_classes):
                     career_probabilities[i] = np.mean(predictions == cls)
+                print(f"🎯 Simple predictions: {dict(zip(career_classes, career_probabilities))}")
             
             # Create recommendations with ML-based scores
             recommendations = []
@@ -256,51 +278,56 @@ class CareerMatcher:
         """Prepare features for ML model input"""
         features = {}
         
-        # Personality features
+        # Personality features - match exact model expectations
         personality = user_profile.get('personality', {}).get('personality_profile', {})
-        for trait, data in personality.items():
-            if isinstance(data, dict) and 'score' in data:
-                features[f'personality_{trait}'] = data['score']
+        for trait in ['openness', 'conscientiousness', 'extraversion', 'agreeableness', 'neuroticism']:
+            trait_data = personality.get(trait, {})
+            if isinstance(trait_data, dict) and 'score' in trait_data:
+                features[f'personality_{trait}'] = trait_data['score']
             else:
                 features[f'personality_{trait}'] = 3.0  # Default neutral score
         
         # Skills features
         skills = user_profile.get('skills', {}).get('skill_profile', {})
+        skills_count = 0
         if isinstance(skills, dict):
-            # Technical skills
-            tech_skills = skills.get('technical_skills', {})
-            if isinstance(tech_skills, dict):
-                features['avg_technical_skills'] = sum(tech_skills.values()) / len(tech_skills) if tech_skills else 0
-            else:
-                features['avg_technical_skills'] = 0
-            
-            # Soft skills
-            soft_skills = skills.get('soft_skills', {})
-            if isinstance(soft_skills, dict):
-                features['avg_soft_skills'] = sum(soft_skills.values()) / len(soft_skills) if soft_skills else 0
-            else:
-                features['avg_soft_skills'] = 0
-            
-            # Overall score
-            features['overall_skill_score'] = skills.get('overall_score', 0)
+            # Count all skills
+            for skill_category in ['technical_skills', 'soft_skills', 'domain_skills']:
+                category_skills = skills.get(skill_category, {})
+                if isinstance(category_skills, dict):
+                    skills_count += len(category_skills)
         
-        # Preferences features
-        preferences = user_profile.get('preferences', {})
-        features['work_environment_preference'] = self._encode_work_environment(
-            preferences.get('work_environment', 'office')
-        )
-        features['salary_expectation'] = preferences.get('salary_expectations', 800000)
+        features['skills_count'] = skills_count
         
-        # User data features
+        # Experience features
         user_data = user_profile.get('user_data', {})
-        features['education_level'] = self._encode_education_level(
-            user_data.get('education', '')
-        )
-        features['experience_years'] = self._extract_experience_years(
-            user_data.get('experience', '')
-        )
+        experience_text = user_data.get('experience', '')
+        features['experience_years'] = self._extract_experience_years(experience_text)
         
-        return pd.DataFrame([features])
+        # Education features
+        education_text = user_data.get('education', '')
+        features['education_level'] = self._encode_education_level(education_text)
+        
+        # Location features
+        location = user_data.get('location', 'india')
+        features['location_tier'] = self._encode_location_tier(location)
+        
+        # Convert to DataFrame with proper column order
+        feature_df = pd.DataFrame([features])
+        
+        # Ensure all required features are present
+        required_features = [
+            'education_level', 'experience_years', 'skills_count',
+            'personality_openness', 'personality_conscientiousness', 
+            'personality_extraversion', 'personality_agreeableness', 
+            'personality_neuroticism', 'location_tier'
+        ]
+        
+        for feature in required_features:
+            if feature not in feature_df.columns:
+                feature_df[feature] = 0  # Default value
+        
+        return feature_df[required_features]  # Return in correct order
     
     def _encode_work_environment(self, work_env: str) -> int:
         """Encode work environment preference as numeric value"""
@@ -331,6 +358,19 @@ class CareerMatcher:
         import re
         matches = re.findall(r'(\d+)\s*(?:year|yr)', experience.lower())
         return float(matches[0]) if matches else 0.0
+    
+    def _encode_location_tier(self, location: str) -> int:
+        """Encode location tier based on Indian city classification"""
+        tier1_cities = ['bangalore', 'mumbai', 'delhi', 'hyderabad', 'pune', 'chennai', 'kolkata']
+        tier2_cities = ['ahmedabad', 'jaipur', 'surat', 'lucknow', 'kanpur', 'nagpur', 'indore', 'thane']
+        
+        location_lower = location.lower()
+        if location_lower in tier1_cities:
+            return 3  # Tier 1
+        elif location_lower in tier2_cities:
+            return 2  # Tier 2
+        else:
+            return 1  # Tier 3 or other
     
     def _find_career_profile(self, career_id: str) -> Optional[Dict]:
         """Find career profile by ID"""

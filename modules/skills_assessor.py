@@ -43,8 +43,14 @@ class SkillsAssessor:
         try:
             model_path = 'models/trained_models/skills_model.pkl'
             if os.path.exists(model_path):
-                self.skills_model = joblib.load(model_path)
-                print("✅ Skills prediction model loaded successfully")
+                model_data = joblib.load(model_path)
+                if isinstance(model_data, dict) and 'model' in model_data:
+                    self.skills_model = model_data['model']
+                    self.skills_model_data = model_data
+                    print("✅ Skills prediction model loaded successfully")
+                else:
+                    self.skills_model = model_data
+                    print("✅ Skills prediction model loaded successfully")
             else:
                 print("⚠️ Skills model not found, using fallback assessment")
         except Exception as e:
