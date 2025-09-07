@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Skillora AI Career Advisor - Your AI-Powered Career Guide{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Discover Your Perfect Career Path with 
+          <span class="highlight">AI-Powered Guidance</span>
+        </h1>
+        <p class="hero-description">
+          Skillora AI analyzes your personality, skills, and market trends to provide 
+          personalized career recommendations tailored for Indian students and professionals.
+        </p>
+        <div class="hero-buttons">
+          <a href="{{ url_for('assessment') }}" class="btn btn-primary">
+            🚀 Start Assessment
+          </a>
+          <a href="{{ url_for('about') }}" class="btn btn-secondary">
+            📖 Learn More
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-icon">🎯</div>
+        <div class="floating-elements">
+          <div class="floating-element">💼</div>
+          <div class="floating-element">📊</div>
+          <div class="floating-element">🧠</div>
+          <div class="floating-element">🎓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">AI-Powered Career Intelligence</h2>
+      <p class="section-description">
+        Comprehensive assessment and analysis to guide your career decisions
+      </p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3 class="feature-title">Personality Analysis</h3>
+        <p class="feature-description">
+          Advanced Big Five personality assessment to understand your work style, 
+          preferences, and natural strengths.
+        </p>
+        <div class="feature-stats">
+          <span class="stat">95% Accuracy</span>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3 class="feature-title">Skills Assessment</h3>
+        <p class="feature-description">
+          Comprehensive evaluation of technical, soft, and domain-specific skills 
+          with personalized gap analysis.
+        </p>
+        <div class="feature-stats">
+          <span class="stat">40+ Skill Categories</span>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">📈</div>
+        <h3 class="feature-title">Market Intelligence</h3>
+        <p class="feature-description">
+          Real-time job market analysis with salary predictions, demand forecasting, 
+          and industry trend insights.
+        </p>
+        <div class="feature-stats">
+          <span class="stat">Live Market Data</span>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Career Matching</h3>
+        <p class="feature-description">
+          AI-powered matching algorithm that connects your profile with 
+          525+ career paths and opportunities.
+        </p>
+        <div class="feature-stats">
+          <span class="stat">525+ Careers</span>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3 class="feature-title">Learning Roadmaps</h3>
+        <p class="feature-description">
+          Personalized learning paths with curated resources, timelines, 
+          and milestone tracking for skill development.
+        </p>
+        <div class="feature-stats">
+          <span class="stat">Custom Roadmaps</span>
+        </div>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3 class="feature-title">AI Career Coach</h3>
+        <p class="feature-description">
+          24/7 intelligent chatbot providing career guidance, answering questions, 
+          and offering personalized advice.
+        </p>
+        <div class="feature-stats">
+          <span class="stat">24/7 Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">How Skillora AI Works</h2>
+      <p class="section-description">
+        Simple steps to discover your ideal career path
+      </p>
+    </div>
+    
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3 class="step-title">Complete Assessment</h3>
+          <p class="step-description">
+            Take our comprehensive personality and skills assessment designed 
+            specifically for Indian students and professionals.
+          </p>
+        </div>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3 class="step-title">AI Analysis</h3>
+          <p class="step-description">
+            Our advanced AI analyzes your profile against market data, 
+            career requirements, and success patterns.
+          </p>
+        </div>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3 class="step-title">Get Recommendations</h3>
+          <p class="step-description">
+            Receive personalized career matches with compatibility scores, 
+            salary insights, and growth potential analysis.
+          </p>
+        </div>
+      </div>
+      
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3 class="step-title">Follow Your Roadmap</h3>
+          <p class="step-description">
+            Get detailed learning paths, skill development plans, and 
+            milestone tracking to achieve your career goals.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">525+</div>
+        <div class="stat-label">Career Profiles</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">Accuracy Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">40+</div>
+        <div class="stat-label">Skill Categories</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">&lt;1s</div>
+        <div class="stat-label">Response Time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-content">
+      <h2 class="cta-title">Ready to Discover Your Perfect Career?</h2>
+      <p class="cta-description">
+        Join thousands of students and professionals who have found their 
+        ideal career path with Skillora AI's intelligent guidance system.
+      </p>
+      <div class="cta-buttons">
+        <a href="{{ url_for('assessment') }}" class="btn btn-primary btn-large">
+          🚀 Start Your Journey
+        </a>
+        <a href="{{ url_for('chatbot') }}" class="btn btn-secondary btn-large">
+          💬 Chat with AI
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
