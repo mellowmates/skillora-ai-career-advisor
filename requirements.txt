@@ -1,59 +1,8 @@
-# Core Web Framework
-Flask>=2.3.0
-gunicorn>=21.0.0
+#Flask Web Framework
+flask
 
-# Data Science and Machine Learning
-pandas>=2.0.0
-numpy>=1.24.0
-scikit-learn>=1.3.0
-joblib>=1.3.0
+#For loading the .env file
+python-dotenv
 
-# Data Processing and Analysis
-scipy>=1.10.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
-
-# Web Scraping (for job market data)
-requests>=2.31.0
-beautifulsoup4>=4.12.0
-lxml>=4.9.0
-
-# JSON and Data Handling
-jsonschema>=4.19.0
-
-# Date and Time Processing
-python-dateutil>=2.8.0
-
-# Text Processing and NLP
-nltk>=3.8.0
-textblob>=0.17.0
-
-# Configuration Management
-python-dotenv>=1.0.0
-
-# Logging and Utilities
-colorama>=0.4.0
-
-# Development and Testing
-pytest>=7.4.0
-pytest-cov>=4.1.0
-
-# Optional: For enhanced data visualization
-plotly>=5.17.0
-
-# Optional: For advanced ML features
-xgboost>=1.7.0
-
-# Optional: For API rate limiting and caching
-Flask-Limiter>=3.5.0
-Flask-Caching>=2.1.0
-
-# Optional: For session management
-Flask-Session>=0.5.0
-
-# Optional: For CORS handling
-Flask-CORS>=4.0.0
-
-# Additional ML and data processing
-imbalanced-learn>=0.11.0
-category-encoders>=2.6.0
+# Google's official library for the Gemini API
+google-generativeai

@@ -1,97 +1,50 @@
 [
-  {
-    "career_id": "software_engineer",
-    "title": "Software Engineer",
-    "description": "Design, develop, and maintain software applications",
-    "required_skills": ["Python", "JavaScript", "Problem Solving", "Git", "Teamwork"],
-    "personality_traits": {
-      "openness": "high",
-      "conscientiousness": "high",
-      "extraversion": "medium",
-      "agreeableness": "medium",
-      "neuroticism": "low"
+    {
+        "career_id": "software_engineer",
+        "title": "Software Engineer",
+        "description": "Designs, develops, and maintains software applications and systems to meet user needs.",
+        "required_skills": ["Python", "JavaScript", "SQL", "Git", "Data Structures", "Algorithms"],
+        "interests": ["Technology", "Creative"],
+        "job_market_demand": "Very High"
     },
-    "education_requirements": ["Bachelor's in Computer Science or related field"],
-    "experience_level": "entry_to_senior",
-    "growth_prospects": "High",
-    "work_environment": "office_remote",
-    "salary_range": {"min": 600000, "max": 1200000, "currency": "INR"},
-    "job_market_demand": "Very High"
-  },
-  {
-    "career_id": "data_scientist",
-    "title": "Data Scientist",
-    "description": "Analyze complex data to drive business decisions",
-    "required_skills": ["Python", "Machine Learning", "Statistics", "SQL", "Data Analysis"],
-    "personality_traits": {
-      "openness": "very_high",
-      "conscientiousness": "high",
-      "extraversion": "medium",
-      "agreeableness": "medium",
-      "neuroticism": "low"
+    {
+        "career_id": "data_scientist",
+        "title": "Data Scientist",
+        "description": "Analyzes complex data to extract meaningful insights and drive business decisions using statistical models.",
+        "required_skills": ["Python", "Machine Learning", "Statistics", "SQL", "Data Analysis", "Tableau"],
+        "interests": ["Technology", "Business", "Finance"],
+        "job_market_demand": "Very High"
     },
-    "education_requirements": ["Bachelor's in Statistics, Math, CS or related field"],
-    "experience_level": "junior_to_senior",
-    "growth_prospects": "Very High",
-    "work_environment": "office_remote",
-    "salary_range": {"min": 800000, "max": 1500000, "currency": "INR"},
-    "job_market_demand": "Very High"
-  },
-  {
-    "career_id": "web_developer",
-    "title": "Web Developer",
-    "description": "Create and maintain websites and web applications",
-    "required_skills": ["HTML/CSS", "JavaScript", "React", "Node.js", "Problem Solving"],
-    "personality_traits": {
-      "openness": "high",
-      "conscientiousness": "high",
-      "extraversion": "medium",
-      "agreeableness": "medium",
-      "neuroticism": "low"
+    {
+        "career_id": "product_manager",
+        "title": "Product Manager",
+        "description": "Oversees the entire product lifecycle from conception to launch, focusing on market needs and business goals.",
+        "required_skills": ["Product Strategy", "Communication", "Leadership", "Analytics", "Project Management"],
+        "interests": ["Technology", "Business"],
+        "job_market_demand": "High"
     },
-    "education_requirements": ["Bachelor's in Computer Science or equivalent experience"],
-    "experience_level": "entry_to_senior",
-    "growth_prospects": "High",
-    "work_environment": "office_remote",
-    "salary_range": {"min": 500000, "max": 1000000, "currency": "INR"},
-    "job_market_demand": "High"
-  },
-  {
-    "career_id": "mobile_developer",
-    "title": "Mobile App Developer",
-    "description": "Develop mobile applications for iOS and Android",
-    "required_skills": ["Java", "Swift", "React Native", "UI/UX Design", "Problem Solving"],
-    "personality_traits": {
-      "openness": "high",
-      "conscientiousness": "high",
-      "extraversion": "medium",
-      "agreeableness": "medium",
-      "neuroticism": "low"
+    {
+        "career_id": "ux_designer",
+        "title": "UX Designer",
+        "description": "Creates user-friendly and visually appealing digital products by focusing on user research and interaction design.",
+        "required_skills": ["User Research", "Wireframing", "Prototyping", "Figma", "Communication"],
+        "interests": ["Technology", "Creative"],
+        "job_market_demand": "High"
     },
-    "education_requirements": ["Bachelor's in Computer Science or related field"],
-    "experience_level": "entry_to_senior",
-    "growth_prospects": "High",
-    "work_environment": "office_remote",
-    "salary_range": {"min": 550000, "max": 1100000, "currency": "INR"},
-    "job_market_demand": "High"
-  },
-  {
-    "career_id": "product_manager",
-    "title": "Product Manager",
-    "description": "Lead product development and strategy",
-    "required_skills": ["Product Strategy", "Communication", "Leadership", "Analytics", "Project Management"],
-    "personality_traits": {
-      "openness": "high",
-      "conscientiousness": "very_high",
-      "extraversion": "high",
-      "agreeableness": "high",
-      "neuroticism": "low"
+    {
+        "career_id": "financial_analyst",
+        "title": "Financial Analyst",
+        "description": "Analyzes financial data to help companies make sound investment and business decisions.",
+        "required_skills": ["Financial Modeling", "Excel", "Statistics", "Accounting", "Communication"],
+        "interests": ["Finance", "Business"],
+        "job_market_demand": "Medium"
     },
-    "education_requirements": ["Bachelor's degree, MBA preferred"],
-    "experience_level": "junior_to_senior",
-    "growth_prospects": "Very High",
-    "work_environment": "office",
-    "salary_range": {"min": 1000000, "max": 2000000, "currency": "INR"},
-    "job_market_demand": "High"
-  }
+    {
+        "career_id": "digital_marketer",
+        "title": "Digital Marketer",
+        "description": "Promotes brands and products online using various digital channels to attract and engage customers.",
+        "required_skills": ["SEO", "Content Marketing", "Social Media", "Data Analysis", "Google Analytics"],
+        "interests": ["Creative", "Business"],
+        "job_market_demand": "High"
+    }
 ]

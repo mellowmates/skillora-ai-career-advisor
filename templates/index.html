@@ -1,229 +1,588 @@
-{% extends "base.html" %}
-
-{% block title %}Skillora AI Career Advisor - Your AI-Powered Career Guide{% endblock %}
-
-{% block content %}
-<!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">
-          Discover Your Perfect Career Path with 
-          <span class="highlight">AI-Powered Guidance</span>
-        </h1>
-        <p class="hero-description">
-          Skillora AI analyzes your personality, skills, and market trends to provide 
-          personalized career recommendations tailored for Indian students and professionals.
-        </p>
-        <div class="hero-buttons">
-          <a href="{{ url_for('assessment') }}" class="btn btn-primary">
-            🚀 Start Assessment
-          </a>
-          <a href="{{ url_for('about') }}" class="btn btn-secondary">
-            📖 Learn More
-          </a>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-icon">🎯</div>
-        <div class="floating-elements">
-          <div class="floating-element">💼</div>
-          <div class="floating-element">📊</div>
-          <div class="floating-element">🧠</div>
-          <div class="floating-element">🎓</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Features Section -->
-<section class="features">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">AI-Powered Career Intelligence</h2>
-      <p class="section-description">
-        Comprehensive assessment and analysis to guide your career decisions
-      </p>
-    </div>
+<!DOCTYPE html>
+<html lang="en" x-data="{ darkMode: false }" :class="{ 'dark': darkMode }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillora - AI Career Advisor</title>
+    <meta name="description" content="Unlock your career potential with AI-powered guidance, personalized recommendations, and market insights.">
     
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🧠</div>
-        <h3 class="feature-title">Personality Analysis</h3>
-        <p class="feature-description">
-          Advanced Big Five personality assessment to understand your work style, 
-          preferences, and natural strengths.
-        </p>
-        <div class="feature-stats">
-          <span class="stat">95% Accuracy</span>
-        </div>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3 class="feature-title">Skills Assessment</h3>
-        <p class="feature-description">
-          Comprehensive evaluation of technical, soft, and domain-specific skills 
-          with personalized gap analysis.
-        </p>
-        <div class="feature-stats">
-          <span class="stat">40+ Skill Categories</span>
-        </div>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">📈</div>
-        <h3 class="feature-title">Market Intelligence</h3>
-        <p class="feature-description">
-          Real-time job market analysis with salary predictions, demand forecasting, 
-          and industry trend insights.
-        </p>
-        <div class="feature-stats">
-          <span class="stat">Live Market Data</span>
-        </div>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🎯</div>
-        <h3 class="feature-title">Career Matching</h3>
-        <p class="feature-description">
-          AI-powered matching algorithm that connects your profile with 
-          525+ career paths and opportunities.
-        </p>
-        <div class="feature-stats">
-          <span class="stat">525+ Careers</span>
-        </div>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🗺️</div>
-        <h3 class="feature-title">Learning Roadmaps</h3>
-        <p class="feature-description">
-          Personalized learning paths with curated resources, timelines, 
-          and milestone tracking for skill development.
-        </p>
-        <div class="feature-stats">
-          <span class="stat">Custom Roadmaps</span>
-        </div>
-      </div>
-      
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3 class="feature-title">AI Career Coach</h3>
-        <p class="feature-description">
-          24/7 intelligent chatbot providing career guidance, answering questions, 
-          and offering personalized advice.
-        </p>
-        <div class="feature-stats">
-          <span class="stat">24/7 Available</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- How It Works Section -->
-<section class="how-it-works">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">How Skillora AI Works</h2>
-      <p class="section-description">
-        Simple steps to discover your ideal career path
-      </p>
-    </div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3 class="step-title">Complete Assessment</h3>
-          <p class="step-description">
-            Take our comprehensive personality and skills assessment designed 
-            specifically for Indian students and professionals.
-          </p>
-        </div>
-      </div>
-      
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3 class="step-title">AI Analysis</h3>
-          <p class="step-description">
-            Our advanced AI analyzes your profile against market data, 
-            career requirements, and success patterns.
-          </p>
-        </div>
-      </div>
-      
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3 class="step-title">Get Recommendations</h3>
-          <p class="step-description">
-            Receive personalized career matches with compatibility scores, 
-            salary insights, and growth potential analysis.
-          </p>
-        </div>
-      </div>
-      
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3 class="step-title">Follow Your Roadmap</h3>
-          <p class="step-description">
-            Get detailed learning paths, skill development plans, and 
-            milestone tracking to achieve your career goals.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        /* Custom CSS Variables for Dark Mode */
+        :root {
+            --background: 255 255 255;
+            --foreground: 71 85 105;
+            --card: 241 245 249;
+            --card-foreground: 71 85 105;
+            --primary: 5 150 105;
+            --primary-foreground: 255 255 255;
+            --secondary: 16 185 129;
+            --secondary-foreground: 255 255 255;
+            --muted: 241 245 249;
+            --muted-foreground: 71 85 105;
+            --border: 229 231 235;
+            --input: 255 255 255;
+            --ring: 5 150 105;
+        }
+        
+        .dark {
+            --background: 15 23 42;
+            --foreground: 248 250 252;
+            --card: 30 41 59;
+            --card-foreground: 248 250 252;
+            --primary: 16 185 129;
+            --primary-foreground: 15 23 42;
+            --secondary: 71 85 105;
+            --secondary-foreground: 248 250 252;
+            --muted: 71 85 105;
+            --muted-foreground: 156 163 175;
+            --border: 71 85 105;
+            --input: 71 85 105;
+            --ring: 112 128 144;
+        }
+        
+        .bg-background { background-color: rgb(var(--background)); }
+        .text-foreground { color: rgb(var(--foreground)); }
+        .bg-card { background-color: rgb(var(--card)); }
+        .text-card-foreground { color: rgb(var(--card-foreground)); }
+        .bg-primary { background-color: rgb(var(--primary)); }
+        .text-primary-foreground { color: rgb(var(--primary-foreground)); }
+        .bg-secondary { background-color: rgb(var(--secondary)); }
+        .text-secondary-foreground { color: rgb(var(--secondary-foreground)); }
+        .bg-muted { background-color: rgb(var(--muted)); }
+        .text-muted-foreground { color: rgb(var(--muted-foreground)); }
+        .border-border { border-color: rgb(var(--border)); }
+        .bg-input { background-color: rgb(var(--input)); }
+        .ring-ring { --tw-ring-color: rgb(var(--ring)); }
+        
+        .progress-bar {
+            background: linear-gradient(to right, rgb(var(--primary)) var(--progress, 0%), rgb(var(--muted)) var(--progress, 0%));
+        }
+        
+        .chat-scroll {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: 'rgb(var(--background))',
+                        foreground: 'rgb(var(--foreground))',
+                        card: 'rgb(var(--card))',
+                        'card-foreground': 'rgb(var(--card-foreground))',
+                        primary: 'rgb(var(--primary))',
+                        'primary-foreground': 'rgb(var(--primary-foreground))',
+                        secondary: 'rgb(var(--secondary))',
+                        'secondary-foreground': 'rgb(var(--secondary-foreground))',
+                        muted: 'rgb(var(--muted))',
+                        'muted-foreground': 'rgb(var(--muted-foreground))',
+                        border: 'rgb(var(--border))',
+                        input: 'rgb(var(--input))',
+                        ring: 'rgb(var(--ring))',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
 
-<!-- Stats Section -->
-<section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number">525+</div>
-        <div class="stat-label">Career Profiles</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">95%</div>
-        <div class="stat-label">Accuracy Rate</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">40+</div>
-        <div class="stat-label">Skill Categories</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">&lt;1s</div>
-        <div class="stat-label">Response Time</div>
-      </div>
-    </div>
-  </div>
-</section>
+<body class="bg-background text-foreground min-h-screen" 
+      x-data="{
+          activeTab: 'home',
+          assessmentStep: 0,
+          isLoading: false,
+          assessmentData: {
+              experience: '',
+              education: '',
+              interestField: '',
+              techSkills: '',
+              goals: ''
+          },
+          dashboardData: null,
+          chatMessages: [
+              { role: 'bot', content: 'Hello! I\'m your AI Career Advisor. Ask me anything about your career path!' }
+          ],
+          chatInput: '',
+          
+          assessmentQuestions: [
+              {
+                  id: 'experience',
+                  title: 'Professional Experience',
+                  question: 'What is your level of professional experience?',
+                  type: 'radio',
+                  options: ['Fresher (0-1 year)', 'Early Career (2-5 years)', 'Mid-Career (6-10 years)', 'Senior Level (10+ years)']
+              },
+              {
+                  id: 'education',
+                  title: 'Educational Background',
+                  question: 'What is your highest educational qualification?',
+                  type: 'text',
+                  placeholder: 'e.g., B.Tech in Computer Science, MBA in Marketing'
+              },
+              {
+                  id: 'interestField',
+                  title: 'Field of Interest',
+                  question: 'Which field are you most interested in?',
+                  type: 'radio',
+                  options: ['Software Development', 'Data Science & Analytics', 'Cybersecurity', 'Cloud Computing', 'Product Management', 'UX/UI Design']
+              },
+              {
+                  id: 'techSkills',
+                  title: 'Technical Skills',
+                  question: 'List any programming languages, frameworks, or tools you know.',
+                  type: 'textarea',
+                  placeholder: 'e.g., Python, JavaScript, React, TensorFlow, AWS',
+                  condition: () => ['Software Development', 'Data Science & Analytics', 'Cybersecurity', 'Cloud Computing'].includes(this.assessmentData.interestField)
+              },
+              {
+                  id: 'goals',
+                  title: 'Career Goals',
+                  question: 'Briefly describe your primary career aspirations.',
+                  type: 'textarea',
+                  placeholder: 'e.g., To become a senior AI engineer, lead a design team...'
+              }
+          ],
+          
+          async sendMessage() {
+              if (!this.chatInput.trim()) return;
+              const userMessage = this.chatInput;
+              this.chatMessages.push({ role: 'user', content: userMessage });
+              this.chatInput = '';
+              this.isLoading = true;
 
-<!-- CTA Section -->
-<section class="cta">
-  <div class="container">
-    <div class="cta-content">
-      <h2 class="cta-title">Ready to Discover Your Perfect Career?</h2>
-      <p class="cta-description">
-        Join thousands of students and professionals who have found their 
-        ideal career path with Skillora AI's intelligent guidance system.
-      </p>
-      <div class="cta-buttons">
-        <a href="{{ url_for('assessment') }}" class="btn btn-primary btn-large">
-          🚀 Start Your Journey
-        </a>
-        <a href="{{ url_for('chatbot') }}" class="btn btn-secondary btn-large">
-          💬 Chat with AI
-        </a>
-      </div>
+              try {
+                  const response = await fetch('/api/chat', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ message: userMessage })
+                  });
+                  const data = await response.json();
+                  this.chatMessages.push({ role: 'bot', content: data.response });
+              } catch (error) {
+                  this.chatMessages.push({ role: 'bot', content: 'Sorry, I\'m having trouble connecting. Please try again later.' });
+              } finally {
+                  this.isLoading = false;
+                  this.$nextTick(() => { document.querySelector('.chat-scroll').scrollTop = document.querySelector('.chat-scroll').scrollHeight; });
+              }
+          },
+          
+          async getAnalysis() {
+              console.log('getAnalysis called with data:', this.assessmentData);
+              this.isLoading = true;
+              this.activeTab = 'dashboard';
+              try {
+                  const response = await fetch('/api/analyze', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(this.assessmentData)
+                  });
+                  
+                  console.log('API response status:', response.status);
+                  
+                  if (!response.ok) {
+                      const errorData = await response.json();
+                      console.log('API error response:', errorData);
+                      throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+                  }
+                  
+                  const data = await response.json();
+                  console.log('API success response:', data);
+                  
+                  // Check if the response has an error field with actual content
+                  if (data.error && data.error.trim().length > 0) {
+                      this.dashboardData = { error: data.error };
+                  } else {
+                      // Remove any empty error field from successful responses
+                      if (data.error === '') {
+                          delete data.error;
+                      }
+                      this.dashboardData = data;
+                  }
+                  
+              } catch (error) {
+                  console.error('Analysis Error:', error);
+                  this.dashboardData = { 
+                      error: `Could not generate your career analysis: ${error.message}. Please check your internet connection and try again.` 
+                  };
+              } finally {
+                  this.isLoading = false;
+              }
+          },
+
+          nextAssessment() {
+              // Move to next step first
+              if (this.assessmentStep < this.assessmentQuestions.length - 1) {
+                  this.assessmentStep++;
+                  
+                  // Check if the new step should be skipped
+                  const nextQuestion = this.assessmentQuestions[this.assessmentStep];
+                  if (nextQuestion.condition && !nextQuestion.condition()) {
+                      this.nextAssessment(); // Skip this conditional question
+                      return;
+                  }
+              } else {
+                  this.getAnalysis();
+              }
+          },
+          
+          prevAssessment() {
+              if (this.assessmentStep > 0) {
+                  this.assessmentStep--;
+              }
+          },
+          
+          getProgressPercentage() {
+              return ((this.assessmentStep + 1) / this.assessmentQuestions.length) * 100;
+          }
+      }"
+
+      x-init="
+          // Initialize dark mode from localStorage
+          darkMode = localStorage.getItem('darkMode') === 'true';
+          $watch('darkMode', value => localStorage.setItem('darkMode', value));
+          
+          // Initialize Lucide icons
+          lucide.createIcons();
+      ">
+
+    <!-- Header -->
+    <header class="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <i data-lucide="brain-circuit" class="w-6 h-6 text-primary-foreground"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-foreground">Skillora</h1>
+                        <p class="text-sm text-muted-foreground">AI Career Advisor</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <!-- Added dark mode toggle button -->
+                    <button @click="darkMode = !darkMode" 
+                            class="p-2 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground transition-colors">
+                        <i data-lucide="sun" x-show="darkMode" class="w-5 h-5"></i>
+                        <i data-lucide="moon" x-show="!darkMode" class="w-5 h-5"></i>
+                    </button>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex gap-6">
+                        <button @click="activeTab = 'home'" 
+                                :class="activeTab === 'home' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
+                                class="px-4 py-2 rounded-lg transition-colors">
+                            Home
+                        </button>
+                        <button @click="activeTab = 'assessment'" 
+                                :class="activeTab === 'assessment' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
+                                class="px-4 py-2 rounded-lg transition-colors">
+                            Assessment
+                        </button>
+                        <button @click="activeTab = 'dashboard'" 
+                                :class="activeTab === 'dashboard' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
+                                class="px-4 py-2 rounded-lg transition-colors">
+                            Dashboard
+                        </button>
+                        <button @click="activeTab = 'chat'" 
+                                :class="activeTab === 'chat' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
+                                class="px-4 py-2 rounded-lg transition-colors">
+                            AI Chat
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Home Tab -->
+        <div x-show="activeTab === 'home'" class="space-y-8">
+            <!-- Hero Section -->
+            <section class="text-center py-12">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-4xl font-bold text-foreground mb-4">
+                        Unlock Your Career Potential with AI-Powered Guidance
+                    </h2>
+                    <p class="text-xl text-muted-foreground mb-8">
+                        Get personalized career recommendations, market insights, and expert advice tailored to your unique skills and aspirations.
+                    </p>
+                    <div class="flex gap-4 justify-center flex-wrap">
+                        <button @click="activeTab = 'assessment'" 
+                                class="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-secondary transition-colors flex items-center gap-2">
+                            Start Assessment
+                            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                        <button @click="activeTab = 'chat'" 
+                                class="border border-border bg-card text-card-foreground px-6 py-3 rounded-lg hover:bg-muted transition-colors flex items-center gap-2">
+                            Chat with AI
+                            <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features Grid -->
+            <section class="grid md:grid-cols-3 gap-6">
+                <div class="bg-card border border-border rounded-lg p-6 text-center">
+                    <i data-lucide="target" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-card-foreground mb-2">Personalized Assessment</h3>
+                    <p class="text-muted-foreground">Comprehensive evaluation of your skills, experience, and career goals</p>
+                </div>
+
+                <div class="bg-card border border-border rounded-lg p-6 text-center">
+                    <i data-lucide="bar-chart-3" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-card-foreground mb-2">Market Insights</h3>
+                    <p class="text-muted-foreground">Real-time data on job trends, salary ranges, and industry growth</p>
+                </div>
+
+                <div class="bg-card border border-border rounded-lg p-6 text-center">
+                    <i data-lucide="sparkles" class="w-12 h-12 text-primary mx-auto mb-4"></i>
+                    <h3 class="text-xl font-semibold text-card-foreground mb-2">AI-Powered Advice</h3>
+                    <p class="text-muted-foreground">Intelligent recommendations powered by advanced machine learning</p>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="bg-card border border-border rounded-lg p-8">
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-primary">10K+</div>
+                        <div class="text-muted-foreground">Career Assessments</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-primary">95%</div>
+                        <div class="text-muted-foreground">Success Rate</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-primary">500+</div>
+                        <div class="text-muted-foreground">Career Paths</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-primary">24/7</div>
+                        <div class="text-muted-foreground">AI Support</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Assessment Tab -->
+        <div x-show="activeTab === 'assessment'" class="space-y-6">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-foreground mb-4">Career Assessment</h2>
+                    <p class="text-muted-foreground">Answer a few questions to get personalized career recommendations</p>
+                    
+                    <!-- Progress Bar -->
+                    <div class="mt-4 bg-muted rounded-full h-2">
+                        <div class="bg-primary h-2 rounded-full transition-all duration-300" 
+                             :style="`width: ${getProgressPercentage()}%`"></div>
+                    </div>
+                </div>
+
+                <div class="bg-card border border-border rounded-lg p-6">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-card-foreground mb-2" x-text="assessmentQuestions[assessmentStep]?.title"></h3>
+                        <p class="text-muted-foreground" x-text="assessmentQuestions[assessmentStep]?.question"></p>
+                    </div>
+
+                    <div class="space-y-4 mb-6">
+                        <!-- Radio Questions -->
+                        <template x-if="assessmentQuestions[assessmentStep]?.type === 'radio'">
+                            <div class="space-y-3">
+                                <template x-for="option in assessmentQuestions[assessmentStep]?.options" :key="option">
+                                    <label class="flex items-center space-x-3 cursor-pointer">
+                                        <input type="radio" 
+                                               :name="assessmentQuestions[assessmentStep]?.id"
+                                               :value="option"
+                                               x-model="assessmentData[assessmentQuestions[assessmentStep]?.id]"
+                                               class="text-primary focus:ring-primary">
+                                        <span class="text-card-foreground" x-text="option"></span>
+                                    </label>
+                                </template>
+                            </div>
+                        </template>
+
+                        <!-- Text Questions -->
+                        <template x-if="assessmentQuestions[assessmentStep]?.type === 'text' || assessmentQuestions[assessmentStep]?.type === 'textarea'">
+                            <textarea 
+                                :placeholder="assessmentQuestions[assessmentStep]?.placeholder"
+                                x-model="assessmentData[assessmentQuestions[assessmentStep]?.id]"
+                                class="w-full p-3 bg-input border border-border rounded-lg text-foreground focus:ring-2 focus:ring-primary focus:border-transparent"
+                                rows="4"></textarea>
+                        </template>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <button @click="prevAssessment()" 
+                                :disabled="assessmentStep === 0"
+                                :class="assessmentStep === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-muted'"
+                                class="px-4 py-2 border border-border rounded-lg text-foreground transition-colors">
+                            Previous
+                        </button>
+                        <button @click="nextAssessment()" 
+                                class="px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-secondary transition-colors"
+                                x-text="assessmentStep === assessmentQuestions.length - 1 ? 'View Results' : 'Next'">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div x-show="activeTab === 'dashboard'" class="space-y-6">
+            <div x-show="isLoading" class="text-center py-12">
+                <i data-lucide="loader-2" class="w-12 h-12 text-primary animate-spin mx-auto mb-4"></i>
+                <h2 class="text-2xl font-bold text-foreground">Analyzing Your Profile...</h2>
+                <p class="text-muted-foreground">Our AI is crafting your personalized career dashboard.</p>
+            </div>
+
+            <div x-show="!isLoading && dashboardData">
+                <!-- Only show error if there's actually a meaningful error message -->
+                <div x-show="dashboardData.error && dashboardData.error.length > 0" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
+                    <strong class="font-bold">Error:</strong>
+                    <span class="block sm:inline" x-text="dashboardData.error"></span>
+                </div>
+
+                <!-- Show dashboard content when there's no error or empty error -->
+                <div x-show="!dashboardData.error || dashboardData.error.length === 0" class="space-y-6">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-foreground mb-4">Your AI-Powered Career Dashboard</h2>
+                        <p class="text-muted-foreground">Personalized recommendations based on your assessment.</p>
+                    </div>
+                    <div class="grid lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 space-y-6">
+                            <div class="bg-card border border-border rounded-lg p-6">
+                                <h3 class="text-xl font-semibold text-card-foreground mb-4 flex items-center gap-2"><i data-lucide="target" class="w-5 h-5 text-primary"></i> Top Career Matches</h3>
+                                <div class="space-y-4">
+                                    <template x-for="match in dashboardData.top_matches" :key="match.career">
+                                        <div class="flex items-center justify-between p-4 border border-border rounded-lg">
+                                            <div class="flex-1">
+                                                <h4 class="font-semibold text-card-foreground" x-text="match.career"></h4>
+                                                <p class="text-sm text-muted-foreground" x-text="`${match.salary_range} • Growth: ${match.growth}`"></p>
+                                            </div>
+                                            <span class="bg-secondary text-secondary-foreground px-3 py-1 rounded-full text-sm" x-text="match.match_percentage"></span>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="bg-card border border-border rounded-lg p-6">
+                                <h3 class="text-xl font-semibold text-card-foreground mb-4 flex items-center gap-2"><i data-lucide="lightbulb" class="w-5 h-5 text-primary"></i> Skill Development Plan</h3>
+                                <div class="space-y-4">
+                                    <template x-for="skill in dashboardData.skill_development" :key="skill.skill">
+                                        <div class="space-y-2">
+                                            <div class="flex justify-between items-center">
+                                                <span class="font-medium text-card-foreground" x-text="skill.skill"></span>
+                                                <span class="bg-muted text-muted-foreground px-2 py-1 rounded text-xs" x-text="skill.recommendation"></span>
+                                            </div>
+                                            <div class="bg-muted rounded-full h-2"><div class="bg-primary h-2 rounded-full" :style="`width: ${skill.proficiency_level}`"></div></div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-6">
+                            <div class="bg-card border border-border rounded-lg p-6">
+                                <h3 class="text-xl font-semibold text-card-foreground mb-4 flex items-center gap-2"><i data-lucide="trending-up" class="w-5 h-5 text-primary"></i> Market Insights</h3>
+                                <div class="text-center p-4 bg-primary/10 rounded-lg mb-4">
+                                    <div class="text-2xl font-bold text-primary" x-text="dashboardData.market_insights.job_growth_percentage"></div>
+                                    <div class="text-sm text-muted-foreground">Job Growth in Your Field</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between"><span class="text-sm text-card-foreground">Remote Job Availability</span><span class="text-sm font-medium text-card-foreground" x-text="dashboardData.market_insights.remote_jobs_percentage"></span></div>
+                                    <div class="flex justify-between"><span class="text-sm text-card-foreground">Avg. Fresher Salary</span><span class="text-sm font-medium text-card-foreground" x-text="dashboardData.market_insights.avg_fresher_salary"></span></div>
+                                    <div class="flex justify-between"><span class="text-sm text-card-foreground">Current Skills Demand</span><span class="text-sm font-medium text-card-foreground" x-text="dashboardData.market_insights.skills_demand"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Chat Tab -->
+        <div x-show="activeTab === 'chat'" class="max-w-4xl mx-auto">
+            <div class="bg-card border border-border rounded-lg overflow-hidden">
+                <div class="chat-scroll p-4 space-y-4">
+                    <template x-for="(message, index) in chatMessages" :key="index">
+                        <div :class="message.role === 'user' ? 'flex justify-end' : 'flex justify-start'">
+                            <div class="rounded-lg p-3 max-w-[80%]" :class="message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'">
+                                <p class="text-sm" x-text="message.content"></p>
+                            </div>
+                        </div>
+                    </template>
+                    <div x-show="isLoading" class="flex justify-start"><div class="rounded-lg p-3 bg-muted text-muted-foreground text-sm">Thinking...</div></div>
+                </div>
+                <div class="border-t border-border p-4">
+                    <div class="flex gap-2">
+                        <input type="text" placeholder="Ask me about your career..." x-model="chatInput" @keyup.enter="sendMessage()" class="flex-1 p-3 bg-input border border-border rounded-lg text-foreground focus:ring-2 focus:ring-primary focus:border-transparent">
+                        <button @click="sendMessage()" class="bg-primary text-primary-foreground p-3 rounded-lg hover:bg-secondary transition-colors"><i data-lucide="send" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Mobile Navigation -->
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border">
+        <div class="grid grid-cols-4 gap-1 p-2">
+            <button @click="activeTab = 'home'" 
+                    :class="activeTab === 'home' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"
+                    class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
+                <i data-lucide="target" class="w-4 h-4"></i>
+                <span class="text-xs">Home</span>
+            </button>
+            <button @click="activeTab = 'assessment'" 
+                    :class="activeTab === 'assessment' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"
+                    class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
+                <i data-lucide="check-circle" class="w-4 h-4"></i>
+                <span class="text-xs">Assessment</span>
+            </button>
+            <button @click="activeTab = 'dashboard'" 
+                    :class="activeTab === 'dashboard' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"
+                    class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
+                <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                <span class="text-xs">Dashboard</span>
+            </button>
+            <button @click="activeTab = 'chat'" 
+                    :class="activeTab === 'chat' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"
+                    class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span class="text-xs">AI Chat</span>
+            </button>
+        </div>
     </div>
-  </div>
-</section>
-{% endblock %}
+
+    <script>
+        // Initialize Lucide icons after Alpine.js loads
+        document.addEventListener('alpine:init', () => {
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        });
+        
+        // Re-initialize icons when content changes
+        document.addEventListener('alpine:updated', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

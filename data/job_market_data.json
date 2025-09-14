@@ -1,55 +1,12 @@
 {
-  "software_engineer": {
-    "demand": "Very High",
-    "growth_rate": 15.2,
-    "job_openings": 45000,
-    "salary_trend": "Increasing",
-    "top_locations": ["Bangalore", "Hyderabad", "Pune", "Chennai", "Mumbai"],
-    "skills_in_demand": ["Python", "JavaScript", "Cloud Computing", "DevOps"],
-    "market_insights": "Strong demand driven by digital transformation"
-  },
-  "data_scientist": {
-    "demand": "Very High",
-    "growth_rate": 22.8,
-    "job_openings": 25000,
-    "salary_trend": "Rapidly Increasing",
-    "top_locations": ["Bangalore", "Mumbai", "Delhi", "Hyderabad", "Pune"],
-    "skills_in_demand": ["Machine Learning", "Python", "Statistics", "Big Data"],
-    "market_insights": "Explosive growth in AI/ML adoption across industries"
-  },
-  "web_developer": {
-    "demand": "High",
-    "growth_rate": 12.5,
-    "job_openings": 35000,
-    "salary_trend": "Steady Growth",
-    "top_locations": ["Bangalore", "Mumbai", "Pune", "Chennai", "Noida"],
-    "skills_in_demand": ["React", "Node.js", "JavaScript", "Cloud Platforms"],
-    "market_insights": "Consistent demand for web development skills"
-  },
-  "mobile_developer": {
-    "demand": "High",
-    "growth_rate": 18.3,
-    "job_openings": 20000,
-    "salary_trend": "Increasing",
-    "top_locations": ["Bangalore", "Mumbai", "Hyderabad", "Pune", "Chennai"],
-    "skills_in_demand": ["React Native", "Flutter", "iOS", "Android"],
-    "market_insights": "Growing mobile-first approach driving demand"
-  },
-  "product_manager": {
-    "demand": "High",
-    "growth_rate": 20.1,
-    "job_openings": 15000,
-    "salary_trend": "Rapidly Increasing",
-    "top_locations": ["Bangalore", "Mumbai", "Delhi", "Pune", "Hyderabad"],
-    "skills_in_demand": ["Product Strategy", "Analytics", "Leadership", "Agile"],
-    "market_insights": "High demand for product management expertise in tech companies"
-  },
-  "market_overview": {
-    "total_tech_jobs": 140000,
-    "growth_rate": 16.8,
-    "top_skills": ["Python", "JavaScript", "Machine Learning", "Cloud Computing", "React"],
-    "emerging_trends": ["AI/ML", "Cloud Native", "DevOps", "Cybersecurity", "Blockchain"],
-    "salary_growth": 12.5,
-    "remote_work_percentage": 65
-  }
+    "market_overview": {
+        "top_in_demand_skill": "Machine Learning",
+        "fastest_growing_sector": "Fintech",
+        "avg_fresher_salary_tech": "₹5.5 LPA"
+    },
+    "sector_trends": [
+        { "sector": "Information Technology", "growth_rate": "15.2%" },
+        { "sector": "Healthcare", "growth_rate": "11.8%" },
+        { "sector": "Finance", "growth_rate": "9.4%" }
+    ]
 }

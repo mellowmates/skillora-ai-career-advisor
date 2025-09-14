@@ -12,345 +12,141 @@ Students in India often face a bewildering array of career choices, compounded b
 
 ## 🚀 Our Solution
 
-Skillora AI leverages machine learning and data analytics to create a personalized career advisor that:
+Skillora AI addresses this challenge by providing a smart, personalized, and data-driven career guidance platform. Our solution empowers users by:
 
-- **Intelligent Personality Analysis**: Advanced ML-based system analyzing personality traits using the Big Five model
-- **Comprehensive Skills Assessment**: AI-powered evaluation of technical, soft, and domain-specific skills
-- **Real-Time Market Intelligence**: Dynamic job market analysis with salary predictions and trend forecasting
-- **Smart Career Matching**: ML algorithms combining personality, skills, preferences, and market data
-- **Personalized Learning Roadmaps**: AI-generated career progression paths with actionable skill development plans
-- **Interactive Web Platform**: Modern, responsive interface with real-time recommendations
+- Analyzing their unique skills, interests, and educational background through an interactive assessment.
+- Recommending the most suitable career paths using a rule-based engine that considers user data and real-time market trends.
+- Providing direct access to an AI-powered career coach (via the Gemini API) for intelligent, conversational guidance on any career-related topic.
 
-## 🏗️ Project Structure
+This approach ensures that every user receives advice that is not only personalized but also relevant to the current demands of the Indian job market.
 
-```
-skillora-ai-career-advisor/
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── LICENSE
-├── app.py                          # Main Flask application
-├── config.py                      # Configuration settings
-├── run.py                         # Application runner
-├── train_all_models.py            # ML model training pipeline
-├── modules/                        # Core business logic modules
-│   ├── __init__.py
-│   ├── data_loader.py             # Data loading and management
-│   ├── user_profiler.py           # User profile management
-│   ├── personality_assessor.py    # Big Five personality analysis
-│   ├── skills_assessor.py         # Skills evaluation and gap analysis
-│   ├── career_matcher.py          # AI-powered career matching
-│   ├── learning_roadmap.py        # Personalized learning path generation
-│   └── market_analyzer.py         # Job market intelligence
-├── models/                         # Machine Learning models
-│   ├── data_collection/
-│   │   ├── data_preprocessor.py   # Data preprocessing pipeline
-│   │   ├── kaggle_datasets.py     # Dataset management
-│   │   └── indian_job_scraper.py  # Job market data scraper
-│   ├── training/                  # Model training scripts
-│   │   ├── model_trainer.py       # Main training orchestrator
-│   │   ├── career_recommendation_model.py  # Career model class
-│   │   ├── salary_prediction_model.py      # Salary model class
-│   │   ├── skills_prediction_model.py      # Skills model class
-│   │   ├── train_career_model.py  # Career model training script
-│   │   ├── train_salary_model.py  # Salary model training script
-│   │   └── train_skills_model.py  # Skills model training script
+## ⚠️ Prototype Disclaimer
 
-│   └── model_evaluation.py        # Model evaluation utilities
-├── data/                          # Data files
-│   ├── career_profiles.json       # Career information database
-│   ├── skills_mapping.json        # Skills-to-career mapping
-│   ├── job_market_data.json       # Market trends and statistics
-│   ├── personality_traits.json    # Personality assessment data
-│   ├── learning_resources.json    # Learning resources database
-│   ├── education_paths.json       # Education pathway data
-│   ├── india_locations.json       # Indian cities and locations
-│   ├── salary_data.json          # Salary benchmarks
-│   └── chatbot_knowledge.json     # Chatbot knowledge base
-├── templates/                     # HTML templates
-│   ├── base.html                  # Base template
-│   ├── index.html                 # Landing page
-│   ├── about.html                 # About page
-│   ├── profile.html               # User profile creation
-│   ├── assessment.html            # Assessment interface
-│   ├── dashboard.html             # Main dashboard
-│   ├── career_detail.html         # Career details page
-│   ├── roadmap.html               # Learning roadmap
-│   └── chatbot.html               # AI chatbot interface
-├── static/                        # Static assets
-│   ├── css/
-│   │   └── style.css              # Custom styles
-│   ├── js/
-│   │   └── app.js                 # Frontend JavaScript
-│   └── images/                    # Image assets
-├── chatbot/                       # Chatbot module
-│   ├── __init__.py
-│   ├── chatbot_api.py            # Chatbot API interface
-│   ├── dialog_flow.py            # Dialog flow management
-│   └── fallback_adapter.py       # Fallback response handler
-├── utils/                         # Utility functions
-│   └── __init__.py
-└── docs/                          # Documentation
-    ├── project_plan.md            # Comprehensive project documentation
-    ├── api_documentation.md       # API documentation
-    ├── chatbot_design.md          # Chatbot design documentation
-    └── model_data_sources.md      # Data sources documentation
-```
+Please note that this project is a functional prototype developed within the time constraints of the GenAI Exchange Hackathon. It is designed to demonstrate the core features and the technical viability of the Skillora AI concept. It is not a complete, production-ready application. The focus has been on the user interface, the AI chatbot integration, and the career recommendation logic.
 
-**Note**: The following directories are excluded from version control (see `.gitignore`):
-- `data/raw/` - Large CSV datasets (generated during setup)
-- `data/processed/` - Processed training data (generated during preprocessing)
-- `models/trained_models/` - Trained ML models (.pkl files, generated during training)
+## ✨ Core Features
 
-## 🛠️ Installation & Setup
+This prototype demonstrates the key features that make Skillora a powerful career guidance tool:
+
+- **Interactive User Assessment:** A multi-step questionnaire that dynamically gathers information about a user's education, interests, and skills.
+- **Intelligent Career Advisor:** A backend engine that analyzes assessment data to provide a ranked list of the top 3 most suitable career paths, complete with a match score.
+- **Real-Time Market Insights:** The dashboard displays key data points about the current job market to help users make informed decisions.
+- **AI Chatbot (Powered by Gemini):** A conversational AI coach that connects to the Google Cloud Gemini API to provide intelligent, context-aware answers to career-related questions.
+
+## ⚙️ Technology Stack
+
+This prototype is built with a modern and efficient technology stack, with a strong focus on meeting the hackathon's technical evaluation criteria.
+
+### Backend:
+
+- **Python:** The core programming language.
+- **Flask:** A lightweight web framework to serve the application and create API endpoints.
+- **Google Generative AI:** The official Python SDK to connect to the Gemini API.
+
+### Frontend:
+
+- **HTML, Tailwind CSS, Alpine.js:** A single-page application experience built with modern web technologies for a responsive and beautiful UI.
+
+### AI Integration:
+
+- **Google Cloud Gemini API:** The `gemini-2.5-flash` model is used to power the AI Chatbot, fulfilling the "AI tool utilization" requirement.
+
+## 🛠️ Setup and Installation
+
+Follow these steps to get the Skillora prototype running on your local machine.
 
 ### Prerequisites
 
 - Python 3.8 or higher
-- pip (Python package installer)
-- 4GB+ RAM (for ML model training)
-- No external API keys required!
+- pip (Python package manager)
+- A Google Gemini API Key
 
-### Quick Start
+### 1. Clone the Repository
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/skillora-ai-career-advisor.git
-   cd skillora-ai-career-advisor
-   ```
-
-2. **Create a virtual environment**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Train ML Models (First Time Setup)**
-   ```bash
-   python train_all_models.py
-   ```
-   This will:
-   - Create `data/raw/` and `data/processed/` directories
-   - Process the raw career and salary datasets
-   - Train career recommendation, salary prediction, and skills models
-   - Create `models/trained_models/` directory with trained models (.pkl files)
-
-5. **Run the application**
-   ```bash
-   python app.py
-   ```
-
-6. **Access the application**
-   Open your browser and navigate to `http://localhost:5000`
-
-### Development Setup
-
-For development with hot reload:
 ```bash
-export FLASK_ENV=development
-export FLASK_DEBUG=1
-python app.py
+git clone https://github.com/mellowmates/skillora-ai-career-advisor.git
+cd skillora-ai-career-advisor
 ```
 
-## 🎯 Usage
+### 2. Set up a Virtual Environment
 
-### Assessment Process
+It's a best practice to use a virtual environment to manage project dependencies.
 
-1. **Personality Assessment**: Answer 8 questions about your personality traits and work preferences
-2. **Skills Evaluation**: Rate your skills and provide information about your experience and education
-3. **Career Preferences**: Specify your preferred work environment, salary expectations, and location
-4. **Get Results**: Receive personalized career recommendations with detailed analysis
+**For Windows:**
 
-### Key Features
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
-- **Personality Analysis**: Get insights into your Big Five personality traits
-- **Skills Profile**: Comprehensive evaluation of your technical and soft skills
-- **Career Matches**: AI-powered career recommendations with compatibility scores
-- **Market Intelligence**: Current job market trends and salary information
-- **Career Roadmaps**: Detailed progression paths for your top career matches
+### 3. Install Dependencies
 
-## 🔧 API Endpoints
+Install all the necessary Python libraries from the `requirements.txt` file.
 
-### Assessment Endpoints
-- `GET /api/personality/questions` - Get personality assessment questions
-- `POST /api/personality/analyze` - Analyze personality responses
-- `GET /api/skills/questions` - Get skills assessment questions
-- `POST /api/skills/assess` - Assess user skills
-- `POST /api/career/match` - Match user with careers
+```bash
+pip install -r requirements.txt
+```
 
-### Data Endpoints
-- `GET /api/careers/list` - Get available careers
-- `GET /api/skills/mapping` - Get skills mapping data
-- `GET /api/jobs/market-data` - Get job market data
-- `POST /api/jobs/recommendations` - Get job recommendations
+### 4. Configure Your API Key
 
-### Utility Endpoints
-- `GET /api/health` - Health check
-- `POST /api/session/clear` - Clear session data
-- `GET /api/report/download` - Download assessment report
+Create a new file named `.env` in the root of your project folder. This file will securely store your API key.
 
-## 🧠 AI and Machine Learning Architecture
+Open the `.env` file and add the following line, replacing `your_actual_api_key_here` with your real Gemini API key:
 
-### 1. Career Recommendation Model
-- **Algorithm**: Random Forest Classifier
-- **Features**: Personality traits, skills, experience, education
-- **Output**: Top career matches with confidence scores
-- **Performance**: Trained on 525+ career profiles
+```
+GEMINI_API_KEY=your_actual_api_key_here
+```
 
-### 2. Salary Prediction Model
-- **Algorithm**: Random Forest Regressor
-- **Features**: Experience, location, skills, industry, company size
-- **Output**: Salary range predictions with growth potential
-- **Accuracy**: R² Score of 0.646, MAE of ₹3.97L
+### 5. Run the Application
 
-### 3. Skills Prediction Model
-- **Algorithm**: Multi-output Random Forest
-- **Features**: Career path, current role, experience, industry
-- **Output**: Required skills for target careers
-- **Capability**: Predicts 40+ different skill categories
+You are now ready to start the Flask application.
 
-### 4. Personality Analysis Engine
-- **Model**: Big Five (OCEAN) personality framework
-- **Method**: Weighted scoring algorithm
-- **Features**: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism
-- **Integration**: Feeds into career matching algorithm
-
-### 5. Market Intelligence System
-- **Data Sources**: Real job market data, salary surveys
-- **Analysis**: Trend detection, demand forecasting
-- **Updates**: Dynamic market insights and recommendations
-
-## 📊 Data Sources
-
-### Career Profiles
-- Comprehensive career information database
-- Salary ranges and growth outlook
-- Required and preferred skills
-- Education requirements and career paths
-
-### Skills Mapping
-- Skills-to-career relevance mapping
-- Learning resources and certifications
-- Career relevance scores
-
-### Job Market Data
-- Real-time job market trends
-- Salary benchmarks and growth rates
-- Skill demand analysis
-- Geographic market insights
-
-## 🔒 Privacy and Security
-
-- **No Permanent Storage**: User data is only stored in temporary sessions
-- **Data Privacy**: Clear data usage policies and GDPR compliance considerations
-- **Secure API**: Input validation, rate limiting, and secure session management
-- **External Integrations**: Secure API key management and fallback mechanisms
-
-## 🚀 Deployment
-
-### Local Development
 ```bash
 python app.py
 ```
 
-### Production Deployment
-```bash
-gunicorn -w 4 -b 0.0.0.0:5000 app:app
-```
+The application will be running at `http://127.0.0.1:5000`. Open this address in your web browser to see the prototype in action.
 
-### Docker Deployment
-```dockerfile
-FROM python:3.9-slim
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . .
-EXPOSE 5000
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
-```
+## 🤖 AI Integration with Google Gemini
 
-## 🤝 Contributing
+The core AI feature of this prototype is the chatbot, which is powered by the Google Gemini API. This integration is handled in the `app.py` backend.
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- **Secure API Key:** The application securely loads the `GEMINI_API_KEY` from the `.env` file, ensuring no sensitive credentials are hardcoded in the source code.
+- **API Endpoint:** A Flask route at `/api/chat` is dedicated to handling chatbot requests from the frontend.
+- **Prompt Engineering:** When a user sends a message, the backend constructs a carefully crafted prompt. This prompt instructs the `gemini-1.5-flash` model to act as "Skillora," a friendly and professional career advisor for the Indian market.
+- **Live AI Response:** The prompt is sent to the Gemini API, which generates an intelligent, context-aware response. This response is then sent back to the user in the chat interface.
 
-## 📝 License
+This approach demonstrates a powerful and effective use of a state-of-the-art Large Language Model to provide a dynamic and helpful user experience.
+
+## 🏆 Hackathon Submission
+
+- **Event:** GenAI Exchange Hackathon
+- **Problem Statement:** Personalized Career and Skills Advisor
+- **Objective:** To leverage AI to design an innovative solution for personalized career guidance for Indian students, creating a dynamic and insightful advisory tool that adapts to the fast-changing professional landscape.
 
 ## 👥 Team: The Algorithmic Alchemists
 
-| Name | Role | Email |
-|------|------|-------|
-| **Omprakash Panda** | Team Leader & AI/ML Development | omprakash11273@gmail.com |
-| **Vishwajith Chakravarthy** | Testing, Documentation & Presentation | krishivishwajith@gmail.com |
-| **Vittal Bhajantri** | Backend Integration | vittalgb2005@gmail.com |
-| **Sindhu B L** | Frontend & UI/UX | sindhublava3105@gmail.com |
-
-## 🏆 Hackathon Details
-
-- **Event**: GenAI Exchange Hackathon
-- **Problem Statement**: Personalized Career and Skills Advisor
-- **Objective**: Leverage AI to design an innovative solution for personalized career guidance for Indian students
-- **Focus**: Dynamic, personalized, and insightful advisory tool that adapts to the fast-changing professional landscape
-
-## 🎯 Key Innovations
-
-1. **Multi-Modal Assessment**: Combines personality, skills, and preferences analysis
-2. **Real-Time Market Intelligence**: Dynamic job market analysis with salary predictions
-3. **Personalized Learning Paths**: AI-generated roadmaps with specific skill recommendations
-4. **Offline-First Architecture**: No dependency on external APIs for core functionality
-5. **Indian Job Market Focus**: Tailored for Indian students and job market dynamics
-
-## 📊 Technical Achievements
-
-- **525+ Career Profiles** processed and analyzed
-- **3 ML Models** trained and deployed (Career, Salary, Skills)
-- **40+ Skill Categories** with intelligent recommendations
-- **Big Five Personality Model** implementation
-- **Real-time Predictions** with sub-second response times
-
-## 🔮 Future Roadmap
-
-### Phase 1 (Current)
-- ✅ Core ML models and web platform
-- ✅ Personality and skills assessment
-- ✅ Career matching and salary prediction
-
-### Phase 2 (Next 3 months)
-- 🔄 Google Cloud integration for scalability
-- 🔄 Advanced NLP for resume analysis
-- 🔄 Mobile application development
-- 🔄 Enterprise partnerships
-
-### Phase 3 (6+ months)
-- 📋 AI-powered interview preparation
-- 📋 Corporate talent matching platform
-- 📋 Advanced analytics dashboard
-- 📋 Multi-language support
+| Name                   | Role                             |
+| ---------------------- | -------------------------------- |
+| Omprakash Panda        | Team Leader & AI/ML Development  |
+| Vishwajith Chakravarthy| Testing& Documentation           |
+| Vittal Bhajantri       | Backend Integration              |
+| Sindhu B L             | Frontend & UI/UX                 |
+| Manoj R                | Presentation& Video Editing      |
 
 ## 📞 Contact & Support
 
-- **Team Email**: omprakash11273@gmail.com
-- **Project Repository**: [https://github.com/mellowmates/skillora-ai-career-advisor]
-- **Demo Video**: [Coming Soon]
+- **Team Email:** [omprakash11273@gmail.com](mailto:omprakash11273@gmail.com)
+- **Project Repository:** [https://github.com/mellowmates/skillora-ai-career-advisor](https://github.com/mellowmates/skillora-ai-career-advisor)
 
 ## 🙏 Acknowledgments
 
-- **GenAI Exchange Hackathon** organizers for the opportunity
-- **Google Cloud** for the platform and tools
-- **Open Source Community** for ML libraries and frameworks
-- **Indian Education System** insights and feedback
+- GenAI Exchange Hackathon organizers for the opportunity.
+- Google Cloud for the platform and tools that made this project possible.
+- The Open Source Community for the amazing libraries and frameworks.
 
 ---
 
-**Built with ❤️ by The Algorithmic Alchemists**  
-*Empowering Indian students with AI-driven career guidance*
+*Built with ❤️ by The Algorithmic Alchemists. Empowering Indian students with AI-driven career guidance.*
 
-**GenAI Exchange Hackathon 2025 Submission**
+*GenAI Exchange Hackathon 2025 Submission*
