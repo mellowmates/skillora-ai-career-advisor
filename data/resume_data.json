@@ -1,0 +1,42 @@
+{
+  "personal_info": {
+    "name": "Priya Sharma",
+    "email": "priya.sharma@email.com",
+    "phone": "+91 98765 43210",
+    "linkedin": "linkedin.com/in/priyasharma",
+    "github": "github.com/priyasharma",
+    "location": "Bengaluru, India"
+  },
+  "summary": "Innovative and detail-oriented Software Engineer with a strong foundation in computer science and a passion for developing scalable web applications. Eager to leverage skills in Python, JavaScript, and cloud technologies to solve complex problems and contribute to a forward-thinking team. A quick learner dedicated to continuous skill development and keeping up with the latest industry trends.",
+  "experience": [
+    {
+      "title": "Software Development Intern",
+      "company": "Tech Solutions Inc.",
+      "location": "Bengaluru, India",
+      "dates": "Jan 2024 - Jun 2024",
+      "description": "Contributed to the development of a client-facing web portal using Django and React. Collaborated with a team of 5 to implement new features, write unit tests, and resolve bugs, improving application performance by 10%."
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Technology in Computer Science",
+      "institution": "ABC Institute of Technology",
+      "location": "Delhi, India",
+      "dates": "2020 - 2024",
+      "details": "Graduated with a CGPA of 8.9/10. Relevant coursework: Data Structures, Algorithms, Database Management Systems, Operating Systems."
+    }
+  ],
+  "skills": {
+    "programming_languages": ["Python", "JavaScript", "SQL", "HTML/CSS"],
+    "frameworks": ["Django", "Flask", "React.js", "Node.js"],
+    "developer_tools": ["Git", "Docker", "Postman", "VS Code"],
+    "soft_skills": ["Problem Solving", "Team Collaboration", "Agile Methodologies", "Communication"]
+  },
+  "projects": [
+    {
+      "name": "AI Career Advisor Prototype",
+      "description": "Led the backend development for a Flask-based web application that provides personalized career recommendations using a rule-based engine and integrates with Google's Gemini API for an AI-powered chatbot.",
+      "technologies": ["Python", "Flask", "Gemini API", "HTML", "Tailwind CSS"]
+    }
+  ]
+}

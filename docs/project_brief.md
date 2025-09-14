@@ -40,6 +40,19 @@ Skillora provides a personalized, interactive platform that:
 
 - **Dark Mode Toggle:** A user-friendly option to switch between light and dark themes.
 
+### Resume Builder (Prototype)
+
+The project now includes a simple Resume Builder feature integrated into the main single-page app. Key points:
+
+- A live, form-based resume editor is embedded in `templates/index.html` using Alpine.js. Users can edit personal information, experience, education, skills, and projects.
+- A live preview pane displays the formatted resume in real time as the user edits the form.
+- Client-side PDF export is provided via `html2pdf.js` so users can download their resume directly from the browser without server-side PDF generation.
+- The Dashboard contains a "Generate Resume with AI" button. This sends the user's assessment data to the backend endpoint `/api/generate-resume`, which calls the Gemini API to generate a small structured JSON payload (`summary`, `skills`, `projects`) that is used to prefill the resume editor.
+
+Security & environment note:
+
+- The resume generation flow requires the Gemini API key. An `env.example` file is included; for local development copy it to `.env` and set `GEMINI_API_KEY`. The repository's `.gitignore` ignores `.env` so your real key won't be committed. For production deployments, use a secrets manager or environment-specific secret configuration instead of committing API keys.
+
 ---
 
 ## 4. Technical Architecture & Stack
@@ -50,7 +63,7 @@ Skillora is a single-page web application with a Python backend.
 
 - **Framework:** Flask
 - **Language:** Python
-- **AI Integration:** `google-generativeai` SDK for Python to interact with the `gemini-1.5-flash` model.
+- **AI Integration:** `google-generativeai` SDK for Python to interact with the `gemini-2.5-flash` model.
 - **Environment Management:** `python-dotenv` to manage the Gemini API key securely.
 
 ### Frontend

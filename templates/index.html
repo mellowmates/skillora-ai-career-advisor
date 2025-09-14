@@ -14,6 +14,9 @@
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <style>
         /* Custom CSS Variables for Dark Mode */
@@ -121,6 +124,48 @@
               { role: 'bot', content: 'Hello! I\'m your AI Career Advisor. Ask me anything about your career path!' }
           ],
           chatInput: '',
+          resumeData: {
+            personal_info: {
+                name: 'Your Name',
+                email: 'your.email@example.com',
+                phone: '+91 00000 00000',
+                linkedin: 'linkedin.com/in/yourname',
+                github: 'github.com/yourname',
+                location: 'Your City, Country'
+            },
+            summary: 'Write a compelling professional summary that highlights your key skills and career objectives.',
+            experience: [
+                {
+                title: 'Job Title',
+                company: 'Company Name',
+                location: 'City, Country',
+                dates: 'Month Year - Month Year',
+                description: 'Describe your key responsibilities and achievements in this role.'
+                }
+            ],
+            education: [
+                {
+                degree: 'Your Degree',
+                institution: 'University/College Name',
+                location: 'City, Country',
+                dates: 'Year - Year',
+                details: 'Additional details like CGPA, relevant coursework, etc.'
+                }
+            ],
+            skills: {
+                programming_languages: ['Python', 'JavaScript'],
+                frameworks: ['React', 'Node.js'],
+                developer_tools: ['Git', 'VS Code'],
+                soft_skills: ['Communication', 'Problem Solving']
+            },
+            projects: [
+                {
+                name: 'Project Name',
+                description: 'Brief description of the project and your role.',
+                technologies: ['Technology 1', 'Technology 2']
+                }
+            ]
+          },
           
           assessmentQuestions: [
               {
@@ -149,8 +194,7 @@
                   title: 'Technical Skills',
                   question: 'List any programming languages, frameworks, or tools you know.',
                   type: 'textarea',
-                  placeholder: 'e.g., Python, JavaScript, React, TensorFlow, AWS',
-                  condition: () => ['Software Development', 'Data Science & Analytics', 'Cybersecurity', 'Cloud Computing'].includes(this.assessmentData.interestField)
+                  placeholder: 'e.g., Python, JavaScript, React, TensorFlow, AWS'
               },
               {
                   id: 'goals',
@@ -231,13 +275,6 @@
               // Move to next step first
               if (this.assessmentStep < this.assessmentQuestions.length - 1) {
                   this.assessmentStep++;
-                  
-                  // Check if the new step should be skipped
-                  const nextQuestion = this.assessmentQuestions[this.assessmentStep];
-                  if (nextQuestion.condition && !nextQuestion.condition()) {
-                      this.nextAssessment(); // Skip this conditional question
-                      return;
-                  }
               } else {
                   this.getAnalysis();
               }
@@ -251,6 +288,47 @@
           
           getProgressPercentage() {
               return ((this.assessmentStep + 1) / this.assessmentQuestions.length) * 100;
+          },
+
+          async generateResume() {
+            console.log('generateResume called with data:', this.assessmentData);
+            this.isLoading = true;
+            try {
+                const response = await fetch('/api/generate-resume', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(this.assessmentData)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                this.resumeData.summary = data.summary;
+                this.resumeData.skills = data.skills;
+                this.resumeData.projects = data.projects;
+                this.activeTab = 'resume';
+
+            } catch (error) {
+                console.error('Resume Generation Error:', error);
+                // Optionally, show an error message to the user
+            } finally {
+                this.isLoading = false;
+            }
+          },
+
+          downloadPDF() {
+            const element = document.getElementById('resume-preview');
+            const opt = {
+                margin:       0.5,
+                filename:     'resume.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save();
           }
       }"
 
@@ -301,6 +379,11 @@
                                 :class="activeTab === 'dashboard' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
                                 class="px-4 py-2 rounded-lg transition-colors">
                             Dashboard
+                        </button>
+                        <button @click="activeTab = 'resume'" 
+                                :class="activeTab === 'resume' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
+                                class="px-4 py-2 rounded-lg transition-colors">
+                            Resume Builder
                         </button>
                         <button @click="activeTab = 'chat'" 
                                 :class="activeTab === 'chat' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-foreground hover:bg-muted'"
@@ -451,6 +534,13 @@
                     <div class="text-center mb-8">
                         <h2 class="text-3xl font-bold text-foreground mb-4">Your AI-Powered Career Dashboard</h2>
                         <p class="text-muted-foreground">Personalized recommendations based on your assessment.</p>
+                        <!-- Generate Resume Button -->
+                        <div class="mt-6">
+                            <button @click="generateResume()" class="bg-primary text-primary-foreground px-6 py-3 rounded-lg hover:bg-secondary transition-colors inline-flex items-center gap-2">
+                                <i data-lucide="file-text" class="w-5 h-5"></i>
+                                Generate Resume with AI
+                            </button>
+                        </div>
                     </div>
                     <div class="grid lg:grid-cols-3 gap-6">
                         <div class="lg:col-span-2 space-y-6">
@@ -502,6 +592,137 @@
             </div>
         </div>
 
+        <!-- Resume Builder Tab -->
+        <div x-show="activeTab === 'resume'" class="space-y-6">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold text-foreground mb-4">AI-Powered Resume Builder</h2>
+                <p class="text-muted-foreground">Create a professional resume in minutes. Edit the fields and see the live preview update.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Resume Form -->
+                <div class="bg-card border border-border rounded-lg p-6 space-y-6">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xl font-semibold text-card-foreground">Resume Content</h3>
+                        <button @click="downloadPDF()" class="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-secondary transition-colors flex items-center gap-2">
+                            <i data-lucide="download" class="w-4 h-4"></i>
+                            Download PDF
+                        </button>
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-card-foreground border-b border-border pb-2">Personal Information</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" x-model="resumeData.personal_info.name" placeholder="Full Name" class="w-full p-2 bg-input border border-border rounded-lg">
+                            <input type="email" x-model="resumeData.personal_info.email" placeholder="Email" class="w-full p-2 bg-input border border-border rounded-lg">
+                            <input type="tel" x-model="resumeData.personal_info.phone" placeholder="Phone" class="w-full p-2 bg-input border border-border rounded-lg">
+                            <input type="text" x-model="resumeData.personal_info.location" placeholder="Location" class="w-full p-2 bg-input border border-border rounded-lg">
+                            <input type="text" x-model="resumeData.personal_info.linkedin" placeholder="LinkedIn Profile" class="w-full p-2 bg-input border border-border rounded-lg">
+                            <input type="text" x-model="resumeData.personal_info.github" placeholder="GitHub Profile" class="w-full p-2 bg-input border border-border rounded-lg">
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="space-y-2">
+                        <h4 class="font-semibold text-card-foreground border-b border-border pb-2">Professional Summary</h4>
+                        <textarea x-model="resumeData.summary" rows="4" class="w-full p-2 bg-input border border-border rounded-lg"></textarea>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-card-foreground border-b border-border pb-2">Work Experience</h4>
+                        <template x-for="(job, index) in resumeData.experience" :key="index">
+                            <div class="p-4 border border-border rounded-lg space-y-2">
+                                <input type="text" x-model="job.title" placeholder="Job Title" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="job.company" placeholder="Company" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="job.location" placeholder="Location" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="job.dates" placeholder="Dates (e.g., Jan 2023 - Present)" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <textarea x-model="job.description" placeholder="Job Description" rows="3" class="w-full p-2 bg-input border border-border rounded-lg"></textarea>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="space-y-4">
+                        <h4 class="font-semibold text-card-foreground border-b border-border pb-2">Education</h4>
+                        <template x-for="(edu, index) in resumeData.education" :key="index">
+                            <div class="p-4 border border-border rounded-lg space-y-2">
+                                <input type="text" x-model="edu.degree" placeholder="Degree" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="edu.institution" placeholder="Institution" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="edu.location" placeholder="Location" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="edu.dates" placeholder="Dates" class="w-full p-2 bg-input border border-border rounded-lg">
+                                <input type="text" x-model="edu.details" placeholder="Details (e.g., CGPA, coursework)" class="w-full p-2 bg-input border border-border rounded-lg">
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Resume Preview -->
+                <div id="resume-preview" class="bg-white text-gray-800 p-8 rounded-lg shadow-lg">
+                    <div class="text-center border-b-2 border-gray-300 pb-4 mb-6">
+                        <h1 class="text-4xl font-bold text-gray-900" x-text="resumeData.personal_info.name"></h1>
+                        <p class="text-sm text-gray-600" x-text="`${resumeData.personal_info.email} | ${resumeData.personal_info.phone} | ${resumeData.personal_info.location}`"></p>
+                        <p class="text-sm text-gray-600" x-text="`${resumeData.personal_info.linkedin} | ${resumeData.personal_info.github}`"></p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2 mb-2">PROFESSIONAL SUMMARY</h2>
+                        <p class="text-sm" x-text="resumeData.summary"></p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2 mb-2">WORK EXPERIENCE</h2>
+                        <template x-for="job in resumeData.experience" :key="job.company">
+                            <div class="mb-4">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="text-lg font-semibold" x-text="job.title"></h3>
+                                    <p class="text-sm font-medium text-gray-600" x-text="job.dates"></p>
+                                </div>
+                                <p class="text-sm italic" x-text="`${job.company}, ${job.location}`"></p>
+                                <p class="text-sm mt-1" x-text="job.description"></p>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2 mb-2">EDUCATION</h2>
+                        <template x-for="edu in resumeData.education" :key="edu.institution">
+                            <div class="mb-2">
+                                <div class="flex justify-between items-baseline">
+                                    <h3 class="text-lg font-semibold" x-text="edu.degree"></h3>
+                                    <p class="text-sm font-medium text-gray-600" x-text="edu.dates"></p>
+                                </div>
+                                <p class="text-sm italic" x-text="`${edu.institution}, ${edu.location}`"></p>
+                                <p class="text-sm" x-text="edu.details"></p>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2 mb-2">SKILLS</h2>
+                        <div class="text-sm">
+                            <p><strong>Programming Languages:</strong> <span x-text="resumeData.skills.programming_languages.join(', ')"></span></p>
+                            <p><strong>Frameworks:</strong> <span x-text="resumeData.skills.frameworks.join(', ')"></span></p>
+                            <p><strong>Developer Tools:</strong> <span x-text="resumeData.skills.developer_tools.join(', ')"></span></p>
+                            <p><strong>Soft Skills:</strong> <span x-text="resumeData.skills.soft_skills.join(', ')"></span></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-800 border-b border-gray-300 pb-2 mb-2">PROJECTS</h2>
+                        <template x-for="project in resumeData.projects" :key="project.name">
+                            <div class="mb-2">
+                                <h3 class="text-lg font-semibold" x-text="project.name"></h3>
+                                <p class="text-sm" x-text="project.description"></p>
+                                <p class="text-sm"><strong>Technologies:</strong> <span x-text="project.technologies.join(', ')"></span></p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- AI Chat Tab -->
         <div x-show="activeTab === 'chat'" class="max-w-4xl mx-auto">
             <div class="bg-card border border-border rounded-lg overflow-hidden">
@@ -527,7 +748,7 @@
 
     <!-- Mobile Navigation -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border">
-        <div class="grid grid-cols-4 gap-1 p-2">
+        <div class="grid grid-cols-5 gap-1 p-2">
             <button @click="activeTab = 'home'" 
                     :class="activeTab === 'home' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"
                     class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
@@ -545,6 +766,12 @@
                     class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
                 <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                 <span class="text-xs">Dashboard</span>
+            </button>
+            <button @click="activeTab = 'resume'" 
+                    :class="activeTab === 'resume' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"
+                    class="flex flex-col items-center gap-1 py-2 px-1 rounded-lg transition-colors">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                <span class="text-xs">Resume</span>
             </button>
             <button @click="activeTab = 'chat'" 
                     :class="activeTab === 'chat' ? 'bg-primary text-primary-foreground' : 'bg-transparent text-card-foreground'"

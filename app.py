@@ -233,6 +233,97 @@ def chat_with_gemini():
         error_message = "I'm having a little trouble connecting to my AI brain right now. Please try again in a moment."
         return jsonify({"response": error_message}), 503
 
+@app.route('/api/generate-resume', methods=['POST'])
+def generate_resume():
+    """
+    API endpoint for generating resume content using Gemini.
+    Receives user assessment and returns a resume summary, skills, and projects.
+    """
+    assessment = request.json
+    print(f"Received assessment for resume generation: {assessment}")
+
+    if not assessment:
+        return jsonify({"error": "No assessment data received."}), 400
+
+    if not api_key:
+        return jsonify({"error": "API key for Gemini is not configured."}), 500
+
+    try:
+        model = genai.GenerativeModel('gemini-1.5-flash')
+
+        # Construct a detailed prompt for Gemini
+        prompt = f"""
+        You are 'Skillora', an expert AI resume writer for the Indian job market.
+        Your task is to generate professional and concise content for a user's resume based on their assessment.
+
+        **User Assessment:**
+        - Experience: {assessment.get('experience', 'Not provided')}
+        - Education: {assessment.get('education', 'Not provided')}
+        - Field of Interest: {assessment.get('interestField', 'Not provided')}
+        - Technical Skills: {assessment.get('techSkills', [])}
+        - Career Goals: {assessment.get('goals', 'Not provided')}
+
+        **CRITICAL: Your response MUST be a valid JSON object with this exact structure. Do not include any other text, explanation, or markdown formatting:**
+
+        {{
+          "summary": "A concise and impactful professional summary (2-3 sentences).",
+          "skills": {{
+            "programming_languages": ["Language1", "Language2"],
+            "frameworks": ["Framework1", "Framework2"],
+            "developer_tools": ["Tool1", "Tool2"],
+            "soft_skills": ["Skill1", "Skill2"]
+          }},
+          "projects": [
+            {{
+              "name": "Project Name 1",
+              "description": "A brief description of the project, highlighting the user's contribution and technologies used.",
+              "technologies": ["Tech1", "Tech2"]
+            }},
+            {{
+              "name": "Project Name 2",
+              "description": "Another project description.",
+              "technologies": ["Tech3", "Tech4"]
+            }}
+          ]
+        }}
+
+        **Instructions:**
+        1.  Generate a professional summary tailored to the user's career goals and experience.
+        2.  List relevant technical and soft skills based on their field of interest and provided skills.
+        3.  Create two distinct and realistic project examples that align with the user's profile.
+        4.  IMPORTANT: Return ONLY the JSON object. No additional text, explanations, or markdown formatting.
+        """
+
+        response = model.generate_content(prompt)
+        
+        # Clean the response to ensure it's valid JSON
+        cleaned_response = response.text.strip()
+        
+        if cleaned_response.startswith('```json'):
+            cleaned_response = cleaned_response.replace('```json', '', 1)
+        if cleaned_response.endswith('```'):
+            cleaned_response = cleaned_response.rsplit('```', 1)[0]
+        
+        try:
+            parsed_response = json.loads(cleaned_response)
+            if not all(key in parsed_response for key in ['summary', 'skills', 'projects']):
+                raise ValueError("Missing required fields in AI response")
+            
+            return jsonify(parsed_response)
+            
+        except json.JSONDecodeError as je:
+            print(f"JSON decode error: {je}")
+            print(f"Raw response: {response.text}")
+            return jsonify({
+                "error": f"AI response formatting issue. Raw response: {response.text[:200]}..."
+            }), 500
+
+    except Exception as e:
+        print(f"An error occurred during resume generation: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({"error": f"Failed to generate resume content: {str(e)}"}), 500
+
 # --- Main Entry Point ---
 
 if __name__ == '__main__':

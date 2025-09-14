@@ -138,7 +138,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
 .envrc
 .venv
 env/
@@ -146,6 +145,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Local environment file - do NOT commit your real .env with API keys
+.env
 
 # Spyder project settings
 .spyderproject
@@ -243,5 +245,3 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-.env/

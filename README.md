@@ -33,6 +33,15 @@ This prototype demonstrates the key features that make Skillora a powerful caree
 - **Real-Time Market Insights:** The dashboard displays key data points about the current job market to help users make informed decisions.
 - **AI Chatbot (Powered by Gemini):** A conversational AI coach that connects to the Google Cloud Gemini API to provide intelligent, context-aware answers to career-related questions.
 
+### New: Resume Builder (Prototype)
+
+This prototype now includes a simple Resume Builder feature that helps users convert their assessment into a resume draft, edit it in a form-based UI, preview it live, and download it as a PDF.
+
+- Live form-based editor powered by Alpine.js embedded in the main app (`templates/index.html`).
+- Live preview of the resume so users can see formatting updates as they edit.
+- Download as PDF using client-side html2pdf.js (no server-side PDF generation required).
+- "Generate Resume with AI" button on the Dashboard. This sends the user's assessment data to the backend (`/api/generate-resume`) which calls the Gemini API to generate a structured resume response (summary, skills, projects) that is populated into the resume editor.
+
 ## ⚙️ Technology Stack
 
 This prototype is built with a modern and efficient technology stack, with a strong focus on meeting the hackathon's technical evaluation criteria.
@@ -97,6 +106,33 @@ Open the `.env` file and add the following line, replacing `your_actual_api_key_
 GEMINI_API_KEY=your_actual_api_key_here
 ```
 
+Note: An `env.example` file is included in the repo with the expected environment variable names. You can copy it to `.env` and fill in your actual key. Storing API keys in `.env` is convenient for local development but not recommended for production; consider using a secrets manager or CI/CD secrets instead.
+
+Creating `.env` (recommended local workflow)
+
+1. Copy the example file into `.env`:
+
+```bash
+cp env.example .env
+```
+
+2. Edit `.env` and paste your real Gemini API key (or use an editor):
+
+```bash
+nano .env
+# or
+code .env
+```
+
+3. (Optional) Run the app without a `.env` file by exporting the variable in your shell instead:
+
+```bash
+export GEMINI_API_KEY="your_actual_api_key_here"
+python app.py
+```
+
+Important: The repository's `.gitignore` already lists `.env`, so your file will be ignored. Do NOT commit real API keys. For production, use a secrets manager or configure environment variables in your deployment pipeline.
+
 ### 5. Run the Application
 
 You are now ready to start the Flask application.
@@ -113,6 +149,8 @@ The core AI feature of this prototype is the chatbot, which is powered by the Go
 
 - **Secure API Key:** The application securely loads the `GEMINI_API_KEY` from the `.env` file, ensuring no sensitive credentials are hardcoded in the source code.
 - **API Endpoint:** A Flask route at `/api/chat` is dedicated to handling chatbot requests from the frontend.
+
+- **Resume generation endpoint:** A new backend endpoint `/api/generate-resume` accepts the user's assessment data (POST JSON) and returns a small structured JSON payload containing `summary`, `skills` and `projects`. The frontend `index.html` uses this to prefill the Resume Builder.
 - **Prompt Engineering:** When a user sends a message, the backend constructs a carefully crafted prompt. This prompt instructs the `gemini-2.5-flash` model to act as "Skillora," a friendly and professional career advisor for the Indian market.
 - **Live AI Response:** The prompt is sent to the Gemini API, which generates an intelligent, context-aware response. This response is then sent back to the user in the chat interface.
 
