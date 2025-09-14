@@ -113,7 +113,7 @@ The core AI feature of this prototype is the chatbot, which is powered by the Go
 
 - **Secure API Key:** The application securely loads the `GEMINI_API_KEY` from the `.env` file, ensuring no sensitive credentials are hardcoded in the source code.
 - **API Endpoint:** A Flask route at `/api/chat` is dedicated to handling chatbot requests from the frontend.
-- **Prompt Engineering:** When a user sends a message, the backend constructs a carefully crafted prompt. This prompt instructs the `gemini-1.5-flash` model to act as "Skillora," a friendly and professional career advisor for the Indian market.
+- **Prompt Engineering:** When a user sends a message, the backend constructs a carefully crafted prompt. This prompt instructs the `gemini-2.5-flash` model to act as "Skillora," a friendly and professional career advisor for the Indian market.
 - **Live AI Response:** The prompt is sent to the Gemini API, which generates an intelligent, context-aware response. This response is then sent back to the user in the chat interface.
 
 This approach demonstrates a powerful and effective use of a state-of-the-art Large Language Model to provide a dynamic and helpful user experience.
