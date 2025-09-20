@@ -143,21 +143,7 @@
             border-radius: 1px;
         }
 
-        .theme-toggle {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.5rem;
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
 
-        .theme-toggle:hover {
-            background: var(--bg-secondary);
-            border-color: var(--border-light);
-            transform: scale(1.05);
-        }
 
         /* Mobile Menu */
         .mobile-menu-btn {
@@ -981,8 +967,6 @@
                 <li><a href="#" class="nav-tab" data-section="chat">AI Chat</a></li>
             </ul>
 
-
-
             <button class="mobile-menu-btn">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M3 12h18M3 6h18M3 18h18" />
@@ -1699,18 +1683,6 @@
                     e.preventDefault();
                     console.log('Nav tab clicked:', tab);
                     const sectionId = tab.getAttribute('data-section');
-                    if (sectionId) {
-                        showSection(sectionId);
-                    }
-                });
-            });
-
-            // CTA buttons
-            document.querySelectorAll('[data-section]').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    console.log('CTA button clicked:', btn);
-                    const sectionId = btn.getAttribute('data-section');
                     if (sectionId) {
                         showSection(sectionId);
                     }
@@ -2798,10 +2770,7 @@
             }
         }
 
-        // Theme toggle (placeholder)
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            console.log('Theme toggle clicked');
-        });
+
 
         // Assessment Navigation
         function nextAssessmentStep() {
@@ -2882,6 +2851,18 @@
                     showSection('chat');
                 });
             }
+
+            // Initialize CTA buttons in hero section
+            document.querySelectorAll('.btn[data-section]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('CTA button clicked:', btn);
+                    const sectionId = btn.getAttribute('data-section');
+                    if (sectionId) {
+                        showSection(sectionId);
+                    }
+                });
+            });
 
             // Initialize assessment when assessment section is shown
             const assessmentTab = document.querySelector('[data-section="assessment"]');
