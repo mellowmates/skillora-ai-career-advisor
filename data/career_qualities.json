@@ -1,0 +1,10 @@
+[
+    { "id": "salary", "text": "High earning potential" },
+    { "id": "work_life_balance", "text": "A healthy work-life balance" },
+    { "id": "creativity", "text": "Opportunities for creative expression" },
+    { "id": "leadership", "text": "Leadership and management roles" },
+    { "id": "helping_others", "text": "Making a positive impact on society" },
+    { "id": "job_security", "text": "A stable and secure career path" },
+    { "id": "remote_work", "text": "The flexibility to work remotely" },
+    { "id": "innovation", "text": "Working with cutting-edge technology" }
+]
