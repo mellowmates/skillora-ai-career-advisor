@@ -195,6 +195,11 @@
             }
         }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .hero p {
             font-size: 1.25rem;
             color: var(--text-secondary);
@@ -959,10 +964,10 @@
             <ul class="nav-tabs">
                 <li><a href="#" class="nav-tab active" data-section="home">Home</a></li>
                 <li><a href="#" class="nav-tab" data-section="assessment">Assessment</a></li>
-                <li><a href="#" class="nav-tab" data-section="dashboard">Dashboard</a></li>
-                <li><a href="#" class="nav-tab" data-section="discovery">Discovery</a></li>
-                <li><a href="#" class="nav-tab" data-section="values">Values</a></li>
-                <li><a href="#" class="nav-tab" data-section="pathway">Pathway</a></li>
+                <li class="assessment-required" style="display: none;"><a href="#" class="nav-tab" data-section="dashboard">Dashboard</a></li>
+                <li class="assessment-required" style="display: none;"><a href="#" class="nav-tab" data-section="discovery">Discovery</a></li>
+                <li class="assessment-required" style="display: none;"><a href="#" class="nav-tab" data-section="values">Values</a></li>
+                <li class="assessment-required" style="display: none;"><a href="#" class="nav-tab" data-section="pathway">Pathway</a></li>
                 <li><a href="#" class="nav-tab" data-section="resume">Resume</a></li>
                 <li><a href="#" class="nav-tab" data-section="chat">AI Chat</a></li>
             </ul>
@@ -1196,21 +1201,48 @@
                     Swipe through different careers to discover what interests you most
                 </p>
 
-                <div class="career-stack" id="career-stack">
-                    <p style="text-align: center; color: var(--text-secondary); padding: 2rem;">
-                        Complete your assessment first to discover personalized careers!
-                    </p>
+                <!-- Career Stats -->
+                <div id="discovery-stats" style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; display: none;">
+                    <div style="text-align: center;">
+                        <div id="liked-count" style="font-size: 1.5rem; font-weight: 600; color: var(--accent);">0</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Liked</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="remaining-count" style="font-size: 1.5rem; font-weight: 600; color: var(--text-secondary);">0</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Remaining</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="passed-count" style="font-size: 1.5rem; font-weight: 600; color: var(--danger);">0</div>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem;">Passed</div>
+                    </div>
                 </div>
 
+                <div class="career-stack" id="career-stack">
+                    <!-- Default message when no assessment data -->
+                    <div id="no-assessment-message" style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                        Complete your assessment first to discover personalized careers!
+                        <br><br>
+                        <button class="btn btn-primary" onclick="showSection('assessment')">Take Assessment</button>
+                    </div>
+                    
+                    <!-- Loading state -->
+                    <div id="loading-message" style="text-align: center; color: var(--text-secondary); padding: 2rem; display: none;">
+                        <div style="margin-bottom: 1rem;">
+                            <div style="width: 40px; height: 40px; border: 3px solid var(--border); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+                        </div>
+                        Loading personalized career suggestions...
+                    </div>
+                    
+                    <!-- Career cards will be populated here -->
+                </div>
 
-
-                <div class="career-actions">
-                    <button class="action-btn reject-btn" id="reject-btn">
+                <div class="career-actions" id="career-actions" style="display: none;">
+                    <button class="action-btn reject-btn" onclick="swipeCard('reject')" id="reject-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
-                    <button class="action-btn like-btn" id="like-btn">
+                    <button class="action-btn like-btn" onclick="swipeCard('like')" id="like-btn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -1436,7 +1468,7 @@
         // Application State Management
         const AppState = {
             currentStep: 0,
-            totalSteps: 6,
+            totalSteps: 0, // Will be set dynamically based on assessmentQuestions length
             assessmentData: {
                 experience: '',
                 education: '',
@@ -1698,6 +1730,14 @@
                 return;
             }
 
+            // Check if user is trying to access assessment-required sections without completing assessment
+            const assessmentRequiredSections = ['dashboard', 'discovery', 'values', 'pathway'];
+            if (assessmentRequiredSections.includes(sectionId) && !AppState.assessmentData.experience) {
+                alert('Please complete your assessment first to access this section.');
+                showSection('assessment');
+                return;
+            }
+
             sections.forEach(section => {
                 section.classList.remove('active');
             });
@@ -1719,13 +1759,40 @@
                 }
             }
 
+            // Special handling for assessment section - always initialize properly
+            if (sectionId === 'assessment') {
+                // Reset assessment state and initialize
+                AppState.currentStep = 0;
+                AppState.totalSteps = assessmentQuestions.length;
+                initAssessment();
+            }
+
             // Special handling for discovery section
             if (sectionId === 'discovery') {
+                // Use immediate execution instead of setTimeout for better responsiveness
                 setTimeout(() => {
-                    if (!AppState.careerCards || AppState.careerCards.length === 0) {
-                        loadCareerCards();
-                    } else {
+                    console.log('Discovery section activated, checking for career cards...');
+                    console.log('Current assessment data:', AppState.assessmentData);
+                    console.log('Current career cards:', AppState.careerCards);
+                    
+                    // Check if we already have data but UI is not updated
+                    if (AppState.careerCards && AppState.careerCards.length > 0) {
+                        console.log('Career cards already loaded, rendering...');
                         renderCareerCards();
+                        updateDiscoveryStats();
+                        
+                        // Force show all elements
+                        const noAssessmentMsg = document.getElementById('no-assessment-message');
+                        const loadingMsg = document.getElementById('loading-message');
+                        const discoveryStats = document.getElementById('discovery-stats');
+                        const careerActions = document.getElementById('career-actions');
+                        
+                        if (noAssessmentMsg) noAssessmentMsg.style.display = 'none';
+                        if (loadingMsg) loadingMsg.style.display = 'none';
+                        if (discoveryStats) discoveryStats.style.display = 'flex';
+                        if (careerActions) careerActions.style.display = 'flex';
+                    } else {
+                        loadCareerCards();
                     }
                 }, 100);
             }
@@ -1755,6 +1822,29 @@
         window.resetDiscovery = resetDiscovery;
         window.initValuesQuiz = initValuesQuiz;
         window.showSection = showSection;
+        
+        // Debug function to check state
+        window.debugDiscoveryState = function() {
+            console.log('=== Discovery Debug Info ===');
+            console.log('AppState.assessmentData:', AppState.assessmentData);
+            console.log('AppState.careerCards:', AppState.careerCards);
+            console.log('Current card index:', AppState.currentCardIndex);
+            
+            const noAssessmentMsg = document.getElementById('no-assessment-message');
+            const loadingMsg = document.getElementById('loading-message');
+            const discoveryStats = document.getElementById('discovery-stats');
+            const careerActions = document.getElementById('career-actions');
+            const careerStack = document.getElementById('career-stack');
+            
+            console.log('UI Elements visibility:');
+            console.log('- No assessment message:', noAssessmentMsg ? noAssessmentMsg.style.display : 'not found');
+            console.log('- Loading message:', loadingMsg ? loadingMsg.style.display : 'not found');
+            console.log('- Discovery stats:', discoveryStats ? discoveryStats.style.display : 'not found');
+            console.log('- Career actions:', careerActions ? careerActions.style.display : 'not found');
+            console.log('- Career stack children:', careerStack ? careerStack.children.length : 'not found');
+            
+            return { AppState, elements: { noAssessmentMsg, loadingMsg, discoveryStats, careerActions, careerStack } };
+        };
 
         // API Integration Functions
         async function callAPI(endpoint, data = null, method = 'GET') {
@@ -1913,9 +2003,12 @@
                 AppState.dashboardData = result;
 
                 // Also fetch career suggestions for discovery
-                const suggestions = await callAPI('/api/career-suggestions', AppState.assessmentData, 'POST');
+                const suggestions = await callAPI('/api/career-cards', AppState.assessmentData, 'POST');
                 AppState.careerCards = suggestions;
                 AppState.currentCardIndex = 0;
+
+                // Show assessment-required tabs
+                showAssessmentRequiredTabs();
 
                 showSection('dashboard');
                 renderDashboard();
@@ -1925,6 +2018,20 @@
             } finally {
                 AppState.isLoading = false;
             }
+        }
+
+        function showAssessmentRequiredTabs() {
+            const assessmentRequiredTabs = document.querySelectorAll('.assessment-required');
+            assessmentRequiredTabs.forEach(tab => {
+                tab.style.display = 'list-item';
+            });
+        }
+
+        function hideAssessmentRequiredTabs() {
+            const assessmentRequiredTabs = document.querySelectorAll('.assessment-required');
+            assessmentRequiredTabs.forEach(tab => {
+                tab.style.display = 'none';
+            });
         }
 
         function renderDashboard() {
@@ -1991,116 +2098,286 @@
         // Career Discovery Functions
         async function loadCareerCards() {
             console.log('Loading career cards...', AppState.assessmentData);
+            console.log('Experience value:', AppState.assessmentData.experience);
+            console.log('Full AppState:', AppState);
 
-            if (!AppState.assessmentData.experience) {
-                document.getElementById('career-stack').innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Complete your assessment first to discover careers!</p>';
+            const careerStack = document.getElementById('career-stack');
+            const noAssessmentMsg = document.getElementById('no-assessment-message');
+            const loadingMsg = document.getElementById('loading-message');
+            const discoveryStats = document.getElementById('discovery-stats');
+            const careerActions = document.getElementById('career-actions');
+
+            // Check if assessment is completed - more thorough check
+            const hasExperience = AppState.assessmentData.experience && AppState.assessmentData.experience.trim() !== '';
+            const hasEducation = AppState.assessmentData.education && AppState.assessmentData.education.trim() !== '';
+            const hasInterestField = AppState.assessmentData.interestField && AppState.assessmentData.interestField.trim() !== '';
+            
+            console.log('Assessment checks:', { hasExperience, hasEducation, hasInterestField });
+            
+            if (!hasExperience || !hasEducation || !hasInterestField) {
+                console.log('Assessment incomplete, showing message');
+                noAssessmentMsg.style.display = 'block';
+                loadingMsg.style.display = 'none';
+                discoveryStats.style.display = 'none';
+                careerActions.style.display = 'none';
                 return;
             }
 
+            console.log('Assessment complete, loading careers...');
             // Show loading state
-            document.getElementById('career-stack').innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Loading personalized career suggestions...</p>';
+            noAssessmentMsg.style.display = 'none';
+            loadingMsg.style.display = 'block';
+            discoveryStats.style.display = 'none';
+            careerActions.style.display = 'none';
 
             try {
                 const careers = await callAPI('/api/career-cards', AppState.assessmentData, 'POST');
                 console.log('Received careers:', careers);
-                AppState.careerCards = careers;
-                AppState.currentCardIndex = 0;
-                renderCareerCards();
+                
+                if (careers && Array.isArray(careers) && careers.length > 0) {
+                    AppState.careerCards = careers;
+                    AppState.currentCardIndex = 0;
+                    AppState.likedCareers = [];
+                    AppState.rejectedCareers = [];
+                    
+                    loadingMsg.style.display = 'none';
+                    discoveryStats.style.display = 'flex';
+                    careerActions.style.display = 'flex';
+                    
+                    renderCareerCards();
+                    updateDiscoveryStats();
+                } else {
+                    throw new Error('No career cards received');
+                }
             } catch (error) {
                 console.error('Failed to load career cards:', error);
-                document.getElementById('career-stack').innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Failed to load careers. Please try again later.</p>';
+                careerStack.innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                        <p>Failed to load careers. Please try again later.</p>
+                        <button class="btn btn-primary" onclick="loadCareerCards()" style="margin-top: 1rem;">Retry</button>
+                    </div>
+                `;
+                loadingMsg.style.display = 'none';
+                discoveryStats.style.display = 'none';
+                careerActions.style.display = 'none';
             }
         }
 
         function renderCareerCards() {
             const stack = document.getElementById('career-stack');
             if (!AppState.careerCards || AppState.careerCards.length === 0) {
-                stack.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Complete your assessment first to discover careers!</p>';
                 return;
             }
 
-            stack.innerHTML = '';
-            AppState.careerCards.forEach((career, index) => {
+            // Clear existing cards but keep other elements
+            const existingCards = stack.querySelectorAll('.career-card');
+            existingCards.forEach(card => card.remove());
+
+            // Render current and next card
+            for (let i = AppState.currentCardIndex; i < Math.min(AppState.currentCardIndex + 2, AppState.careerCards.length); i++) {
+                const career = AppState.careerCards[i];
                 const card = document.createElement('div');
                 card.className = 'career-card';
-                card.style.zIndex = AppState.careerCards.length - index;
-                card.innerHTML = `
-                    <h3>${career.title}</h3>
-                    <p>${career.description}</p>
-                    <div style="color: var(--accent); font-weight: 600; margin-top: 1rem;">
-                        Demand: ${career.job_market_demand || 'Unknown'}
-                    </div>
-                `;
-
-                if (index === AppState.currentCardIndex) {
-                    card.style.display = 'flex';
-                } else if (index === AppState.currentCardIndex + 1) {
-                    card.style.display = 'flex';
-                    card.style.transform = 'scale(0.95) translateY(10px)';
+                
+                if (i === AppState.currentCardIndex) {
+                    card.style.zIndex = '10';
+                    card.style.transform = 'scale(1)';
                 } else {
-                    card.style.display = 'none';
+                    card.style.zIndex = '5';
+                    card.style.transform = 'scale(0.95) translateY(10px)';
+                    card.style.opacity = '0.7';
                 }
 
+                card.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <h3 style="margin: 0; color: var(--text-primary); font-size: 1.5rem;">${career.title}</h3>
+                        <span style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600;">
+                            ${career.job_market_demand || 'Unknown'}
+                        </span>
+                    </div>
+                    
+                    <p style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                        ${career.description}
+                    </p>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Required Skills:</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            ${(career.required_skills || []).map(skill => 
+                                `<span style="background: var(--bg-tertiary); border: 1px solid var(--border); color: var(--text-primary); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.85rem;">
+                                    ${skill}
+                                </span>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    ${career.interests && career.interests.length > 0 ? `
+                        <div>
+                            <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1rem;">Related Interests:</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                ${career.interests.map(interest => 
+                                    `<span style="background: rgba(52, 211, 153, 0.2); color: var(--accent); padding: 0.25rem 0.75rem; border-radius: 1rem; font-size: 0.85rem;">
+                                        ${interest}
+                                    </span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                `;
+
                 stack.appendChild(card);
-            });
+            }
+            
+            // Ensure action buttons are visible when cards are rendered
+            const careerActions = document.getElementById('career-actions');
+            if (careerActions) {
+                careerActions.style.display = 'flex';
+                console.log('Career actions buttons should now be visible');
+            }
+        }
+
+        function updateDiscoveryStats() {
+            document.getElementById('liked-count').textContent = AppState.likedCareers.length;
+            document.getElementById('remaining-count').textContent = Math.max(0, AppState.careerCards.length - AppState.currentCardIndex);
+            document.getElementById('passed-count').textContent = AppState.rejectedCareers.length;
         }
 
         function swipeCard(direction) {
-            if (AppState.currentCardIndex >= AppState.careerCards.length) return;
+            if (!AppState.careerCards || AppState.currentCardIndex >= AppState.careerCards.length) {
+                return;
+            }
 
             const currentCard = AppState.careerCards[AppState.currentCardIndex];
 
-            if (direction === 'like') {
-                AppState.likedCareers.push(currentCard);
-            } else {
-                AppState.rejectedCareers.push(currentCard);
+            // Add visual feedback
+            const card = document.querySelector('.career-card');
+            if (card) {
+                card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                if (direction === 'like') {
+                    card.style.transform = 'translateX(100%) rotate(20deg)';
+                    AppState.likedCareers.push(currentCard);
+                } else {
+                    card.style.transform = 'translateX(-100%) rotate(-20deg)';
+                    AppState.rejectedCareers.push(currentCard);
+                }
+                card.style.opacity = '0';
             }
 
             AppState.currentCardIndex++;
 
-            if (AppState.currentCardIndex >= AppState.careerCards.length) {
-                analyzeSwipeResults();
-            } else {
-                renderCareerCards();
-            }
+            // Remove the visual feedback after animation and render next card
+            setTimeout(() => {
+                if (AppState.currentCardIndex >= AppState.careerCards.length) {
+                    showDiscoveryComplete();
+                } else {
+                    renderCareerCards();
+                    updateDiscoveryStats();
+                }
+            }, 300);
         }
 
-        async function analyzeSwipeResults() {
+        function showDiscoveryComplete() {
+            const careerStack = document.getElementById('career-stack');
+            const discoveryStats = document.getElementById('discovery-stats');
+            const careerActions = document.getElementById('career-actions');
+
+            discoveryStats.style.display = 'none';
+            careerActions.style.display = 'none';
+
             if (AppState.likedCareers.length === 0) {
-                document.getElementById('career-stack').innerHTML = `
+                careerStack.innerHTML = `
                     <div style="text-align: center; padding: 2rem;">
-                        <h3>No careers liked!</h3>
-                        <p style="color: var(--text-secondary);">Try exploring more career options or retake the assessment.</p>
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">No careers liked!</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                            Try exploring more career options or retake the assessment with different answers.
+                        </p>
                         <button class="btn btn-primary" onclick="resetDiscovery()" style="margin-top: 1rem;">Try Again</button>
                     </div>
                 `;
                 return;
             }
 
+            // Analyze swipe results
+            analyzeSwipeResults();
+        }
+
+        async function analyzeSwipeResults() {
+            const careerStack = document.getElementById('career-stack');
+            
             try {
                 const results = await callAPI('/api/swipe-results', {
                     likedCareers: AppState.likedCareers,
-                    dislikedCareers: AppState.rejectedCareers
+                    dislikedCareers: AppState.rejectedCareers,
+                    assessment: AppState.assessmentData
                 }, 'POST');
 
-                document.getElementById('career-stack').innerHTML = `
+                careerStack.innerHTML = `
                     <div style="text-align: center; padding: 2rem;">
-                        <h3>Discovery Complete!</h3>
-                        <p style="color: var(--text-secondary); margin: 1rem 0;">${results.insights}</p>
-                        <div style="margin: 1.5rem 0;">
-                            <h4>Careers You Liked:</h4>
-                            ${AppState.likedCareers.map(career => `
-                                <div style="background: var(--bg-tertiary); padding: 0.5rem; margin: 0.5rem 0; border-radius: 8px;">
-                                    ${career.title}
-                                </div>
-                            `).join('')}
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">🎉 Discovery Complete!</h3>
+                        <p style="color: var(--text-secondary); margin: 1rem 0; line-height: 1.6;">
+                            ${results.insights || 'Based on your preferences, we have some great insights for you!'}
+                        </p>
+                        
+                        <div style="margin: 1.5rem 0; background: var(--bg-tertiary); padding: 1.5rem; border-radius: 12px;">
+                            <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Careers You Liked:</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                                ${AppState.likedCareers.map(career => `
+                                    <span style="background: var(--accent); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                                        ${career.title}
+                                    </span>
+                                `).join('')}
+                            </div>
                         </div>
-                        <button class="btn btn-primary" onclick="generateResumeFromLikes()" style="margin-right: 1rem;">Build Resume</button>
-                        <button class="btn btn-secondary" onclick="resetDiscovery()">Try Again</button>
+
+                        ${results.recommended_skills ? `
+                            <div style="margin: 1.5rem 0; background: var(--bg-secondary); padding: 1.5rem; border-radius: 12px;">
+                                <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Recommended Skills to Develop:</h4>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+                                    ${results.recommended_skills.map(skill => `
+                                        <span style="background: var(--border); color: var(--text-primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem;">
+                                            ${skill}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div style="margin-top: 2rem;">
+                            <button class="btn btn-primary" onclick="showSection('pathway')" style="margin-right: 1rem;">
+                                View Career Pathway
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetDiscovery()">
+                                Discover More
+                            </button>
+                        </div>
                     </div>
                 `;
             } catch (error) {
                 console.error('Failed to analyze swipe results:', error);
+                careerStack.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <h3 style="color: var(--text-primary); margin-bottom: 1rem;">Discovery Complete!</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                            You've completed the career discovery! Based on your selections, you can now explore career pathways.
+                        </p>
+                        <div style="margin: 1.5rem 0;">
+                            <h4 style="color: var(--text-primary); margin-bottom: 1rem;">Careers You Liked:</h4>
+                            ${AppState.likedCareers.map(career => `
+                                <div style="background: var(--bg-tertiary); padding: 0.75rem; margin: 0.5rem 0; border-radius: 8px; color: var(--text-primary);">
+                                    ${career.title}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div style="margin-top: 2rem;">
+                            <button class="btn btn-primary" onclick="showSection('pathway')" style="margin-right: 1rem;">
+                                View Career Pathway
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetDiscovery()">
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+                `;
             }
         }
 
@@ -2108,7 +2385,7 @@
             AppState.currentCardIndex = 0;
             AppState.likedCareers = [];
             AppState.rejectedCareers = [];
-            renderCareerCards();
+            loadCareerCards();
         }
 
         // Chat Functions
@@ -2813,10 +3090,12 @@
         function initAssessment() {
             console.log('Initializing assessment...');
             AppState.currentStep = 0;
+            AppState.totalSteps = assessmentQuestions.length;
             AppState.assessmentData.careerValues = []; // Ensure array is initialized
             renderAssessmentStep();
 
-            // Add navigation event listeners
+            // Add navigation event listeners without delay for better responsiveness
+            // Use a slight delay to ensure DOM is rendered
             setTimeout(() => {
                 const prevBtn = document.querySelector('.step-navigation .btn-secondary');
                 const nextBtn = document.querySelector('.step-navigation .btn-primary');
@@ -2829,7 +3108,7 @@
                     nextBtn.onclick = nextAssessmentStep;
                     console.log('Next button initialized');
                 }
-            }, 100);
+            }, 50); // Small delay to ensure DOM updates
         }
 
         // Add smooth scroll behavior
@@ -2838,10 +3117,16 @@
         // Initialize Application
         document.addEventListener('DOMContentLoaded', function () {
             console.log('DOM loaded, initializing Skillora app...');
+            
+            // Set totalSteps based on actual number of questions
+            AppState.totalSteps = assessmentQuestions.length;
             console.log('AppState initialized:', AppState);
 
             // Initialize navigation first
             initNavigation();
+
+            // Hide assessment-required tabs initially
+            hideAssessmentRequiredTabs();
 
             // Initialize floating chat button
             const floatingChat = document.getElementById('floating-chat');
@@ -2852,10 +3137,11 @@
                 });
             }
 
-            // Initialize CTA buttons in hero section
+            // Initialize CTA buttons in hero section with immediate response
             document.querySelectorAll('.btn[data-section]').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    e.stopPropagation();
                     console.log('CTA button clicked:', btn);
                     const sectionId = btn.getAttribute('data-section');
                     if (sectionId) {
@@ -2864,49 +3150,48 @@
                 });
             });
 
-            // Initialize assessment when assessment section is shown
+            // Initialize assessment when assessment section is shown - remove delay
             const assessmentTab = document.querySelector('[data-section="assessment"]');
             if (assessmentTab) {
                 assessmentTab.addEventListener('click', () => {
-                    setTimeout(initAssessment, 100);
+                    initAssessment(); // Remove setTimeout for immediate response
                 });
             }
 
-            // Initialize career discovery when discovery section is shown
+            // Initialize career discovery when discovery section is shown - remove delay
             const discoveryTab = document.querySelector('[data-section="discovery"]');
             if (discoveryTab) {
                 discoveryTab.addEventListener('click', () => {
-                    setTimeout(() => {
-                        if (!AppState.careerCards || AppState.careerCards.length === 0) {
-                            loadCareerCards();
-                        } else {
-                            renderCareerCards();
-                        }
-                    }, 100);
+                    if (!AppState.careerCards || AppState.careerCards.length === 0) {
+                        loadCareerCards();
+                    } else {
+                        renderCareerCards();
+                        updateDiscoveryStats();
+                    }
                 });
             }
 
-            // Initialize values quiz when values section is shown
+            // Initialize values quiz when values section is shown - remove delay
             const valuesTab = document.querySelector('[data-section="values"]');
             if (valuesTab) {
                 valuesTab.addEventListener('click', () => {
-                    setTimeout(initValuesQuiz, 100);
+                    initValuesQuiz(); // Remove setTimeout for immediate response
                 });
             }
 
-            // Initialize resume builder when resume section is shown
+            // Initialize resume builder when resume section is shown - remove delay
             const resumeTab = document.querySelector('[data-section="resume"]');
             if (resumeTab) {
                 resumeTab.addEventListener('click', () => {
-                    setTimeout(renderResumeBuilder, 100);
+                    renderResumeBuilder(); // Remove setTimeout for immediate response
                 });
             }
 
-            // Initialize chat when chat section is shown
+            // Initialize chat when chat section is shown - remove delay
             const chatTab = document.querySelector('[data-section="chat"]');
             if (chatTab) {
                 chatTab.addEventListener('click', () => {
-                    setTimeout(initChatElements, 100);
+                    initChatElements(); // Remove setTimeout for immediate response
                 });
             }
 
