@@ -87,7 +87,7 @@ def get_career_cards():
         return jsonify({"error": "API key for Gemini is not configured."}), 500
     
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
         prompt = f"""
         You are 'Skillora', an expert AI career advisor. Based on the user's assessment below,
         generate a list of career suggestions for a swiping interface.
@@ -154,7 +154,7 @@ def analyze_career():
         return jsonify({"error": "Market data could not be loaded. Please check server configuration."}), 500
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
 
         # Construct a detailed prompt for Gemini
         prompt = f"""
@@ -373,7 +373,7 @@ def chat_with_gemini():
         return jsonify({"response": "I didn't receive a message. Could you try again?"}), 400
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
 
         prompt = f"""
         You are 'Skillora', a friendly and encouraging AI career advisor for the Indian job market. 
@@ -410,7 +410,7 @@ def generate_resume():
         return jsonify({"error": "API key for Gemini is not configured."}), 500
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
 
         # Construct a detailed prompt for Gemini
         prompt = f"""
@@ -538,7 +538,7 @@ def analyze_qualities():
         return jsonify({"error": "No choices received."}), 400
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
         prompt = f"""
         You are an expert career psychologist. A user has completed a comparative judgment quiz
         by choosing between pairs of career qualities. Their winning choices were: {', '.join(choices)}.
@@ -595,7 +595,7 @@ def generate_pathway():
         return jsonify({"error": "User profile and target career are required."}), 400
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
         prompt = f"""
         You are an expert career pathway advisor for the Indian market.
         
@@ -645,7 +645,7 @@ def get_career_suggestions():
         return jsonify({"error": "No assessment data received."}), 400
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
         prompt = f"""
         You are 'Skillora', an expert AI career advisor. Based on the user's assessment below,
         generate a list of career suggestions.
@@ -698,7 +698,7 @@ def analyze_swipe_results():
         return jsonify({"error": "No liked careers to analyze."}), 400
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
         prompt = f"""
         You are 'Skillora', an expert AI career advisor. A user has completed a career swiping exercise.
         
@@ -754,7 +754,7 @@ def get_market_insights():
         return jsonify({"error": "API key for Gemini is not configured."}), 500
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('models/gemini-pro-latest')
         prompt = f"""
         You are 'Skillora', an expert AI career market analyst for the Indian job market.
         
